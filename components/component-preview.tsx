@@ -2,21 +2,23 @@
 
 import { useState } from 'react';
 
-import { cn } from '@/lib/utils';
 import { CopyButton } from '@/components/copy-button';
+import { cn } from '@/lib/utils';
 
 export function ComponentPreview({
   code,
+  highlightedCode,
   children,
 }: {
   code: string;
+  highlightedCode: string;
   children: React.ReactNode;
 }) {
   const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
 
   return (
     <div>
-      <div className="flex border-b border-border">
+      <div className="border-border flex border-b">
         <button
           onClick={() => setActiveTab('preview')}
           className={cn(
@@ -28,7 +30,7 @@ export function ComponentPreview({
         >
           Preview
           {activeTab === 'preview' && (
-            <span className="absolute inset-x-0 -bottom-px h-px bg-foreground" />
+            <span className="bg-foreground absolute inset-x-0 -bottom-px h-px" />
           )}
         </button>
         <button
@@ -42,24 +44,25 @@ export function ComponentPreview({
         >
           Code
           {activeTab === 'code' && (
-            <span className="absolute inset-x-0 -bottom-px h-px bg-foreground" />
+            <span className="bg-foreground absolute inset-x-0 -bottom-px h-px" />
           )}
         </button>
       </div>
 
       {activeTab === 'preview' ? (
-        <div className="flex min-h-[350px] items-center justify-center rounded-lg border border-border p-10 mt-6">
+        <div className="border-border mt-6 flex min-h-[350px] items-center justify-center rounded-lg border p-10">
           {children}
         </div>
       ) : (
-        <div className="relative mt-6 rounded-lg bg-zinc-950 dark:bg-zinc-900">
+        <div className="border-border relative mt-6 overflow-hidden rounded-lg border">
           <CopyButton
             value={code}
-            className="absolute right-4 top-4 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+            className="text-muted-foreground hover:text-foreground absolute top-4 right-4 z-10"
           />
-          <pre className="overflow-x-auto p-6 text-sm leading-relaxed">
-            <code className="font-mono text-zinc-200">{code}</code>
-          </pre>
+          <div
+            className="[&_code]:font-mono [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
         </div>
       )}
     </div>

@@ -2,11 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 
-import { CopyButton } from '@/components/copy-button';
 import { ComponentPreview } from '@/components/component-preview';
-
-import { ShinyButton } from '@/registry/orbit/items/shiny-button/shiny-button';
+import { CopyButton } from '@/components/copy-button';
+import { highlightCode } from '@/lib/highlight';
 import { HelloWorld } from '@/registry/orbit/items/hello-world/hello-world';
+import { ShinyButton } from '@/registry/orbit/items/shiny-button/shiny-button';
 
 // Map of slug → preview component
 const componentMap: Record<string, React.ReactNode> = {
@@ -48,7 +48,9 @@ function getRegistryItem(slug: string): RegistryItem | null {
 
 export async function generateStaticParams() {
   const registryPath = path.join(process.cwd(), 'public', 'r');
-  const files = fs.readdirSync(registryPath).filter((f) => f.endsWith('.json') && f !== 'registry.json');
+  const files = fs
+    .readdirSync(registryPath)
+    .filter((f) => f.endsWith('.json') && f !== 'registry.json');
   return files.map((f) => ({ slug: f.replace('.json', '') }));
 }
 
@@ -73,54 +75,56 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   const usage = usageMap[slug] ?? '';
   const preview = componentMap[slug] ?? null;
 
+  const [highlightedSource, highlightedInstall, highlightedUsage] = await Promise.all([
+    highlightCode(sourceCode, 'tsx'),
+    highlightCode(installCommand, 'bash'),
+    usage ? highlightCode(usage, 'tsx') : Promise.resolve(''),
+  ]);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8 lg:py-24">
         {/* Title & Description */}
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            {item.title}
-          </h1>
-          <p className="text-base text-muted-foreground">{item.description}</p>
+          <h1 className="text-foreground text-3xl font-bold tracking-tight">{item.title}</h1>
+          <p className="text-muted-foreground text-base">{item.description}</p>
         </div>
 
         {/* Preview */}
         <div className="mt-12">
-          <ComponentPreview code={sourceCode}>
+          <ComponentPreview code={sourceCode} highlightedCode={highlightedSource}>
             {preview}
           </ComponentPreview>
         </div>
 
         {/* Installation */}
         <div className="mt-16">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Installation
-          </h2>
-          <div className="relative mt-4 rounded-lg bg-zinc-950 dark:bg-zinc-900">
+          <h2 className="text-foreground text-xl font-semibold tracking-tight">Installation</h2>
+          <div className="border-border relative mt-4 overflow-hidden rounded-lg border">
             <CopyButton
               value={installCommand}
-              className="absolute right-4 top-4 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+              className="text-muted-foreground hover:text-foreground absolute top-4 right-4 z-10"
             />
-            <pre className="overflow-x-auto p-6 text-sm leading-relaxed">
-              <code className="font-mono text-zinc-200">{installCommand}</code>
-            </pre>
+            <div
+              className="[&_code]:font-mono [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: highlightedInstall }}
+            />
           </div>
         </div>
 
         {/* Usage */}
         {usage && (
           <div className="mt-16">
-            <h2 className="text-xl font-semibold tracking-tight text-foreground">
-              Usage
-            </h2>
-            <div className="relative mt-4 rounded-lg bg-zinc-950 dark:bg-zinc-900">
+            <h2 className="text-foreground text-xl font-semibold tracking-tight">Usage</h2>
+            <div className="border-border relative mt-4 overflow-hidden rounded-lg border">
               <CopyButton
                 value={usage}
-                className="absolute right-4 top-4 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+                className="text-muted-foreground hover:text-foreground absolute top-4 right-4 z-10"
               />
-              <pre className="overflow-x-auto p-6 text-sm leading-relaxed">
-                <code className="font-mono text-zinc-200">{usage}</code>
-              </pre>
+              <div
+                className="[&_code]:font-mono [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: highlightedUsage }}
+              />
             </div>
           </div>
         )}
