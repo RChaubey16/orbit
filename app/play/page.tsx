@@ -1,20 +1,25 @@
-import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
+import { Orbit } from "lucide-react";
+
+import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
 
 export default function Play() {
   return (
-    <div className="mx-auto flex min-h-screen max-w-4xl items-center justify-center gap-4">
-      <TestimonialCard
-        avatar="https://github.com/shadcn.png"
-        name="Shadcn"
-        designation="SWE @ Vercel"
-        quote="Lorem ipsum dolor sit amet consectetur adiicing elit. Quisquam, quod."
+    <div className="mx-auto flex min-h-screen max-w-5xl items-center justify-center">
+      <IconCard
+        icon={<Orbit />}
+        title="Professional services."
+        description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+        ctaTitle="Contact sales"
+        ctaLink="#"
       />
-      <TestimonialCard
-        avatar="https://github.com/shadcn.png"
-        name="Shadcn"
-        designation="SWE @ Vercel"
-        quote="Lorem ipsum dolor sit amet consectetur adiicing elit. Quisquam, quod."
-        variant="inset"
+      <IconCard
+        icon={<Orbit />}
+        title="Professional services."
+        description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+        ctaTitle="Contact sales"
+        ctaLink="#"
+        variant="surface"
+        color="#758bfd"
       />
     </div>
   );

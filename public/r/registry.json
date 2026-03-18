@@ -39,6 +39,19 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "icon-card",
+      "type": "registry:ui",
+      "title": "Icon Card",
+      "description": "A card with an icon and a call to action.",
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "registry/orbit/items/icon-card/icon-card.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

@@ -1,18 +1,24 @@
 import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
+import { Orbit } from "lucide-react";
 
 import { ComponentPreview } from "@/components/component-preview";
 import { CopyButton } from "@/components/copy-button";
 import { highlightCode } from "@/lib/highlight";
-import { HelloWorld } from "@/registry/orbit/items/hello-world/hello-world";
-import { ShinyButton } from "@/registry/orbit/items/shiny-button/shiny-button";
-import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
+import {
+  CardDefault as IconCardDefault,
+  CardSurface as IconCardSurface,
+} from "@/registry/orbit/examples/icon-card.tsx/cards";
 import {
   CardDefault,
   CardElevated,
   CardInset,
 } from "@/registry/orbit/examples/testimonial-card/cards";
+import { HelloWorld } from "@/registry/orbit/items/hello-world/hello-world";
+import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
+import { ShinyButton } from "@/registry/orbit/items/shiny-button/shiny-button";
+import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
 
 interface ComponentExample {
   title: string;
@@ -60,6 +66,34 @@ const examplesMap: Record<string, ComponentExample[]> = {
 />`,
     },
   ],
+  "icon-card": [
+    {
+      title: "Default",
+      description: "A minimal icon card with a call-to-action link.",
+      preview: <IconCardDefault />,
+      code: `<IconCard
+  icon={<Orbit />}
+  title="Professional services."
+  description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+  ctaTitle="Contact sales"
+  ctaLink="#"
+/>`,
+    },
+    {
+      title: "Surface",
+      description: "An icon card with a raised surface background and custom color.",
+      preview: <IconCardSurface />,
+      code: `<IconCard
+  icon={<Orbit />}
+  title="Professional services."
+  description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+  ctaTitle="Contact sales"
+  ctaLink="#"
+  variant="surface"
+  color="#758bfd"
+/>`,
+    },
+  ],
 };
 
 // Map of slug → preview component
@@ -73,6 +107,15 @@ const componentMap: Record<string, React.ReactNode> = {
       designation="SWE @ Vercel"
       quote="Lorem ipsum dolor sit amet consectetur adiicing elit. Quisquam, quod."
       variant="inset"
+    />
+  ),
+  "icon-card": (
+    <IconCard
+      icon={<Orbit />}
+      title="Professional services."
+      description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+      ctaTitle="Contact sales"
+      ctaLink="#"
     />
   ),
 };
@@ -99,6 +142,20 @@ export default function Page() {
       designation="SWE @ Vercel"
       quote="Lorem ipsum dolor sit amet consectetur adipiscing elit."
       variant="inset"
+    />
+  )
+}`,
+  "icon-card": `import { Orbit } from "lucide-react"
+import { IconCard } from "@/components/icon-card"
+
+export default function Page() {
+  return (
+    <IconCard
+      icon={<Orbit />}
+      title="Professional services."
+      description="Get tailored guidance on implementation."
+      ctaTitle="Contact sales"
+      ctaLink="#"
     />
   )
 }`,

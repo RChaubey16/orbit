@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "registry/orbit/items/hello-world/hello-world.tsx",
-      "content": "import { Button } from '@/components/ui/button';\n\nexport function HelloWorld() {\n  return <Button>Hello World</Button>;\n}\n",
+      "content": "import { Button } from \"@/components/ui/button\";\n\nexport function HelloWorld() {\n  return <Button>Hello World</Button>;\n}\n",
       "type": "registry:component"
     }
   ],
