@@ -1,27 +1,37 @@
-import fs from 'fs';
-import path from 'path';
-import { notFound } from 'next/navigation';
+import fs from "fs";
+import path from "path";
+import { notFound } from "next/navigation";
 
-import { ComponentPreview } from '@/components/component-preview';
-import { CopyButton } from '@/components/copy-button';
-import { highlightCode } from '@/lib/highlight';
-import { HelloWorld } from '@/registry/orbit/items/hello-world/hello-world';
-import { ShinyButton } from '@/registry/orbit/items/shiny-button/shiny-button';
+import { ComponentPreview } from "@/components/component-preview";
+import { CopyButton } from "@/components/copy-button";
+import { highlightCode } from "@/lib/highlight";
+import { HelloWorld } from "@/registry/orbit/items/hello-world/hello-world";
+import { ShinyButton } from "@/registry/orbit/items/shiny-button/shiny-button";
+import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
 
 // Map of slug → preview component
 const componentMap: Record<string, React.ReactNode> = {
-  'shiny-button': <ShinyButton />,
-  'hello-world': <HelloWorld />,
+  "shiny-button": <ShinyButton />,
+  "hello-world": <HelloWorld />,
+  "testimonial-card": (
+    <TestimonialCard
+      avatar="https://github.com/shadcn.png"
+      name="Shadcn"
+      designation="SWE @ Vercel"
+      quote="Lorem ipsum dolor sit amet consectetur adiicing elit. Quisquam, quod."
+      variant="inset"
+    />
+  ),
 };
 
 // Map of slug → usage example
 const usageMap: Record<string, string> = {
-  'shiny-button': `import { ShinyButton } from "@/components/shiny-button"
+  "shiny-button": `import { ShinyButton } from "@/components/shiny-button"
 
 export default function Page() {
   return <ShinyButton text="Get Started" />
 }`,
-  'hello-world': `import { HelloWorld } from "@/components/hello-world"
+  "hello-world": `import { HelloWorld } from "@/components/hello-world"
 
 export default function Page() {
   return <HelloWorld />
@@ -37,9 +47,9 @@ interface RegistryItem {
 }
 
 function getRegistryItem(slug: string): RegistryItem | null {
-  const filePath = path.join(process.cwd(), 'public', 'r', `${slug}.json`);
+  const filePath = path.join(process.cwd(), "public", "r", `${slug}.json`);
   try {
-    const raw = fs.readFileSync(filePath, 'utf-8');
+    const raw = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(raw);
   } catch {
     return null;
@@ -47,17 +57,17 @@ function getRegistryItem(slug: string): RegistryItem | null {
 }
 
 export async function generateStaticParams() {
-  const registryPath = path.join(process.cwd(), 'public', 'r');
+  const registryPath = path.join(process.cwd(), "public", "r");
   const files = fs
     .readdirSync(registryPath)
-    .filter((f) => f.endsWith('.json') && f !== 'registry.json');
-  return files.map((f) => ({ slug: f.replace('.json', '') }));
+    .filter((f) => f.endsWith(".json") && f !== "registry.json");
+  return files.map((f) => ({ slug: f.replace(".json", "") }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const item = getRegistryItem(slug);
-  if (!item) return { title: 'Component Not Found' };
+  if (!item) return { title: "Component Not Found" };
   return {
     title: `${item.title} - Orbit`,
     description: item.description,
@@ -70,15 +80,15 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
 
   if (!item) notFound();
 
-  const sourceCode = item.files[0]?.content ?? '';
+  const sourceCode = item.files[0]?.content ?? "";
   const installCommand = `pnpm dlx shadcn@latest add https://orbit.ruturaj.xyz/r/${item.name}.json`;
-  const usage = usageMap[slug] ?? '';
+  const usage = usageMap[slug] ?? "";
   const preview = componentMap[slug] ?? null;
 
   const [highlightedSource, highlightedInstall, highlightedUsage] = await Promise.all([
-    highlightCode(sourceCode, 'tsx'),
-    highlightCode(installCommand, 'bash'),
-    usage ? highlightCode(usage, 'tsx') : Promise.resolve(''),
+    highlightCode(sourceCode, "tsx"),
+    highlightCode(installCommand, "bash"),
+    usage ? highlightCode(usage, "tsx") : Promise.resolve(""),
   ]);
 
   return (
