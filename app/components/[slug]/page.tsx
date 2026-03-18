@@ -8,6 +8,59 @@ import { highlightCode } from "@/lib/highlight";
 import { HelloWorld } from "@/registry/orbit/items/hello-world/hello-world";
 import { ShinyButton } from "@/registry/orbit/items/shiny-button/shiny-button";
 import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
+import {
+  CardDefault,
+  CardElevated,
+  CardInset,
+} from "@/registry/orbit/examples/testimonial-card/cards";
+
+interface ComponentExample {
+  title: string;
+  description: string;
+  preview: React.ReactNode;
+  code: string;
+}
+
+// Map of slug → examples
+const examplesMap: Record<string, ComponentExample[]> = {
+  "testimonial-card": [
+    {
+      title: "Default",
+      description: "A clean, minimal testimonial card with no background fill.",
+      preview: <CardDefault />,
+      code: `<TestimonialCard
+  avatar="https://github.com/shadcn.png"
+  name="Shadcn"
+  designation="SWE @ Vercel"
+  quote="Lorem ipsum dolor sit amet consectetur adipiscing elit."
+/>`,
+    },
+    {
+      title: "Elevated",
+      description: "A raised testimonial card with a subtle shadow for depth.",
+      preview: <CardElevated />,
+      code: `<TestimonialCard
+  avatar="https://github.com/shadcn.png"
+  name="Shadcn"
+  designation="SWE @ Vercel"
+  quote="Lorem ipsum dolor sit amet consectetur adipiscing elit."
+  variant="elevated"
+/>`,
+    },
+    {
+      title: "Inset",
+      description: "A testimonial card with a recessed, filled background.",
+      preview: <CardInset />,
+      code: `<TestimonialCard
+  avatar="https://github.com/shadcn.png"
+  name="Shadcn"
+  designation="SWE @ Vercel"
+  quote="Lorem ipsum dolor sit amet consectetur adipiscing elit."
+  variant="inset"
+/>`,
+    },
+  ],
+};
 
 // Map of slug → preview component
 const componentMap: Record<string, React.ReactNode> = {
@@ -35,6 +88,19 @@ export default function Page() {
 
 export default function Page() {
   return <HelloWorld />
+}`,
+  "testimonial-card": `import { TestimonialCard } from "@/components/testimonial-card"
+
+export default function Page() {
+  return (
+    <TestimonialCard
+      avatar="https://github.com/shadcn.png"
+      name="Shadcn"
+      designation="SWE @ Vercel"
+      quote="Lorem ipsum dolor sit amet consectetur adipiscing elit."
+      variant="inset"
+    />
+  )
 }`,
 };
 
@@ -84,12 +150,15 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   const installCommand = `pnpm dlx shadcn@latest add https://orbit.ruturaj.xyz/r/${item.name}.json`;
   const usage = usageMap[slug] ?? "";
   const preview = componentMap[slug] ?? null;
+  const examples = examplesMap[slug] ?? [];
 
-  const [highlightedSource, highlightedInstall, highlightedUsage] = await Promise.all([
-    highlightCode(sourceCode, "tsx"),
-    highlightCode(installCommand, "bash"),
-    usage ? highlightCode(usage, "tsx") : Promise.resolve(""),
-  ]);
+  const [highlightedSource, highlightedInstall, highlightedUsage, ...highlightedExamples] =
+    await Promise.all([
+      highlightCode(sourceCode, "tsx"),
+      highlightCode(installCommand, "bash"),
+      usage ? highlightCode(usage, "tsx") : Promise.resolve(""),
+      ...examples.map((ex) => highlightCode(ex.code, "tsx")),
+    ]);
 
   return (
     <div className="bg-background min-h-screen">
@@ -135,6 +204,29 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
                 className="[&_code]:font-mono [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: highlightedUsage }}
               />
+            </div>
+          </div>
+        )}
+
+        {/* Examples */}
+        {examples.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-foreground text-xl font-semibold tracking-tight">Examples</h2>
+            <div className="mt-6 space-y-12">
+              {examples.map((example, index) => (
+                <div key={example.title}>
+                  <h3 className="text-foreground text-lg font-medium">{example.title}</h3>
+                  <p className="text-muted-foreground mt-1 text-sm">{example.description}</p>
+                  <div className="mt-4">
+                    <ComponentPreview
+                      code={example.code}
+                      highlightedCode={highlightedExamples[index]}
+                    >
+                      {example.preview}
+                    </ComponentPreview>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}
