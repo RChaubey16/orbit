@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useCallback, useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { useCallback, useState } from "react";
+import { Check, Copy } from "lucide-react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 export function CopyButton({ value, className }: { value: string; className?: string }) {
   const [copied, setCopied] = useState(false);
@@ -18,7 +18,7 @@ export function CopyButton({ value, className }: { value: string; className?: st
     <button
       onClick={onCopy}
       className={cn(
-        'text-muted-foreground hover:bg-muted hover:text-foreground inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors',
+        "text-muted-foreground hover:bg-muted hover:text-foreground inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors",
         className,
       )}
       aria-label="Copy to clipboard"

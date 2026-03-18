@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { Github, Orbit } from 'lucide-react';
+import Link from "next/link";
+import { Github, Orbit } from "lucide-react";
 
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navbar() {
   return (

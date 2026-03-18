@@ -48,22 +48,21 @@ export function TestimonialCard({
       .toUpperCase() || "?";
 
   return (
-  
-      <div className={cn(testimonialCardVariants({ variant }), className)} {...props}>
-        <div className="flex items-center gap-2">
-          <Avatar>
-            <AvatarImage src={avatar} alt={name} />
-            <AvatarFallback>{initials}</AvatarFallback>
-          </Avatar>
+    <div className={cn(testimonialCardVariants({ variant }), className)} {...props}>
+      <div className="flex items-center gap-2">
+        <Avatar>
+          <AvatarImage src={avatar} alt={name} />
+          <AvatarFallback>{initials}</AvatarFallback>
+        </Avatar>
 
-          <div>
-            <p className="text-foreground text-base font-semibold">{name}</p>
+        <div>
+          <p className="text-foreground text-base font-semibold">{name}</p>
 
-            {designation && <p className="text-muted-foreground text-sm">{designation}</p>}
-          </div>
+          {designation && <p className="text-muted-foreground text-sm">{designation}</p>}
         </div>
-
-        <p className="text-muted-foreground text-lg leading-relaxed">{quote}</p>
       </div>
+
+      <p className="text-muted-foreground text-lg leading-relaxed">{quote}</p>
+    </div>
   );
 }

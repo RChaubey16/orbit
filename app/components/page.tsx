@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import fs from "fs";
+import path from "path";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 interface RegistryItem {
   name: string;
@@ -10,19 +10,19 @@ interface RegistryItem {
 }
 
 function getRegistryItems(): RegistryItem[] {
-  const registryPath = path.join(process.cwd(), 'public', 'r');
+  const registryPath = path.join(process.cwd(), "public", "r");
   const files = fs
     .readdirSync(registryPath)
-    .filter((f) => f.endsWith('.json') && f !== 'registry.json');
+    .filter((f) => f.endsWith(".json") && f !== "registry.json");
   return files.map((f) => {
-    const raw = fs.readFileSync(path.join(registryPath, f), 'utf-8');
+    const raw = fs.readFileSync(path.join(registryPath, f), "utf-8");
     return JSON.parse(raw);
   });
 }
 
 export const metadata = {
-  title: 'Components - Orbit',
-  description: 'Browse all Orbit components.',
+  title: "Components - Orbit",
+  description: "Browse all Orbit components.",
 };
 
 export default function ComponentsPage() {

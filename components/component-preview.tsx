@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { CopyButton } from '@/components/copy-button';
-import { cn } from '@/lib/utils';
+import { CopyButton } from "@/components/copy-button";
+import { cn } from "@/lib/utils";
 
 export function ComponentPreview({
   code,
@@ -14,42 +14,42 @@ export function ComponentPreview({
   highlightedCode: string;
   children: React.ReactNode;
 }) {
-  const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview');
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
 
   return (
     <div>
       <div className="border-border flex border-b">
         <button
-          onClick={() => setActiveTab('preview')}
+          onClick={() => setActiveTab("preview")}
           className={cn(
-            'relative px-4 pb-3 text-sm font-medium transition-colors',
-            activeTab === 'preview'
-              ? 'text-foreground'
-              : 'text-muted-foreground hover:text-foreground',
+            "relative px-4 pb-3 text-sm font-medium transition-colors",
+            activeTab === "preview"
+              ? "text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           Preview
-          {activeTab === 'preview' && (
+          {activeTab === "preview" && (
             <span className="bg-foreground absolute inset-x-0 -bottom-px h-px" />
           )}
         </button>
         <button
-          onClick={() => setActiveTab('code')}
+          onClick={() => setActiveTab("code")}
           className={cn(
-            'relative px-4 pb-3 text-sm font-medium transition-colors',
-            activeTab === 'code'
-              ? 'text-foreground'
-              : 'text-muted-foreground hover:text-foreground',
+            "relative px-4 pb-3 text-sm font-medium transition-colors",
+            activeTab === "code"
+              ? "text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           Code
-          {activeTab === 'code' && (
+          {activeTab === "code" && (
             <span className="bg-foreground absolute inset-x-0 -bottom-px h-px" />
           )}
         </button>
       </div>
 
-      {activeTab === 'preview' ? (
+      {activeTab === "preview" ? (
         <div className="border-border mt-6 flex min-h-[350px] items-center justify-center rounded-lg border p-10">
           {children}
         </div>
