@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Navbar } from '@/components/navbar';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -28,8 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn('font-sans', inter.variable)}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="en" className={cn('font-sans', inter.variable)} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
