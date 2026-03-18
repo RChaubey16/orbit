@@ -10,7 +10,19 @@
       "description": "A simple hello world component.",
       "files": [
         {
-          "path": "registry/orbit/hello-world/hello-world.tsx",
+          "path": "registry/orbit/items/hello-world/hello-world.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "shiny-button",
+      "type": "registry:block",
+      "title": "Shiny Button",
+      "description": "A shiny button component.",
+      "files": [
+        {
+          "path": "registry/orbit/items/shiny-button/shiny-button.tsx",
           "type": "registry:component"
         }
       ]
