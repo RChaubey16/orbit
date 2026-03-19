@@ -3,9 +3,7 @@
   "name": "image-card",
   "title": "Image Card",
   "description": "A card with an image, title, subtitle, and description.",
-  "dependencies": [
-    "class-variance-authority"
-  ],
+  "dependencies": ["class-variance-authority"],
   "files": [
     {
       "path": "registry/orbit/items/image-card/image-card.tsx",

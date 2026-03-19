@@ -8,14 +8,14 @@ import { CopyButton } from "@/components/copy-button";
 import { highlightCode } from "@/lib/highlight";
 import { CardSurface as IconCardSurface } from "@/registry/orbit/examples/icon-card.tsx/cards";
 import {
+  CardBackground as ImageCardBackground,
+  CardDefault as ImageCardDefault,
+} from "@/registry/orbit/examples/image-card/cards";
+import {
   CardDefault,
   CardElevated,
   CardInset,
 } from "@/registry/orbit/examples/testimonial-card/cards";
-import {
-  CardDefault as ImageCardDefault,
-  CardBackground as ImageCardBackground,
-} from "@/registry/orbit/examples/image-card/cards";
 import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
 import { ImageCard } from "@/registry/orbit/items/image-card/image-card";
 import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";

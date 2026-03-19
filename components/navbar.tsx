@@ -76,7 +76,7 @@ export function Navbar() {
             : "pointer-events-none -translate-y-2 opacity-0"
         }`}
       >
-        <div className="px-2 pb-3 pt-1">
+        <div className="px-2 pt-1 pb-3">
           <Link
             href="/components"
             onClick={() => setMobileOpen(false)}

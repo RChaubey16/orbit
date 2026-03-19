@@ -3,9 +3,7 @@
   "name": "icon-card",
   "title": "Icon Card",
   "description": "A card with an icon and a call to action.",
-  "dependencies": [
-    "class-variance-authority"
-  ],
+  "dependencies": ["class-variance-authority"],
   "files": [
     {
       "path": "registry/orbit/items/icon-card/icon-card.tsx",
