@@ -52,6 +52,19 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "image-card",
+      "type": "registry:ui",
+      "title": "Image Card",
+      "description": "A card with an image, title, subtitle, and description.",
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "registry/orbit/items/image-card/image-card.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

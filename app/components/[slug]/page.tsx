@@ -12,8 +12,13 @@ import {
   CardElevated,
   CardInset,
 } from "@/registry/orbit/examples/testimonial-card/cards";
+import {
+  CardDefault as ImageCardDefault,
+  CardBackground as ImageCardBackground,
+} from "@/registry/orbit/examples/image-card/cards";
 import { HelloWorld } from "@/registry/orbit/items/hello-world/hello-world";
 import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
+import { ImageCard } from "@/registry/orbit/items/image-card/image-card";
 import { ShinyButton } from "@/registry/orbit/items/shiny-button/shiny-button";
 import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
 
@@ -79,6 +84,35 @@ const examplesMap: Record<string, ComponentExample[]> = {
 />`,
     },
   ],
+  "image-card": [
+    {
+      title: "Default",
+      description: "A clean image card with title, subtitle, and description.",
+      preview: <ImageCardDefault />,
+      code: `<ImageCard
+  title="Professional services"
+  description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+  imageSrc="https://images.unsplash.com/photo-1772289934600-cb4ddd71dbd8?q=80&w=1632&auto=format&fit=crop"
+  imageAltText="Hero image"
+  cardLink="#"
+  subTitle="Ruturaj Chaubey | January 20, 2026"
+/>`,
+    },
+    {
+      title: "Background",
+      description: "An image card with a filled background and subtle shadow.",
+      preview: <ImageCardBackground />,
+      code: `<ImageCard
+  title="Snipr"
+  description="Snipr is a screen recording and video editing tool."
+  imageSrc="https://images.unsplash.com/photo-1772289934600-cb4ddd71dbd8?q=80&w=1632&auto=format&fit=crop"
+  imageAltText="Hero image"
+  cardLink="#"
+  subTitle="Ruturaj Chaubey | January 20, 2026"
+  variant="background"
+/>`,
+    },
+  ],
 };
 
 // Map of slug → preview component
@@ -101,6 +135,16 @@ const componentMap: Record<string, React.ReactNode> = {
       description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
       ctaTitle="Contact sales"
       ctaLink="#"
+    />
+  ),
+  "image-card": (
+    <ImageCard
+      title="Professional services"
+      description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
+      imageSrc="https://images.unsplash.com/photo-1772289934600-cb4ddd71dbd8?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      imageAltText="Hero image"
+      cardLink="#"
+      subTitle="Ruturaj Chaubey | January 20, 2026"
     />
   ),
 };
@@ -141,6 +185,20 @@ export default function Page() {
       description="Get tailored guidance on implementation."
       ctaTitle="Contact sales"
       ctaLink="#"
+    />
+  )
+}`,
+  "image-card": `import { ImageCard } from "@/components/image-card"
+
+export default function Page() {
+  return (
+    <ImageCard
+      title="Professional services"
+      description="Get tailored guidance on implementation."
+      imageSrc="/hero.jpg"
+      imageAltText="Hero image"
+      cardLink="#"
+      subTitle="Author | January 20, 2026"
     />
   )
 }`,
