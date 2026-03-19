@@ -3,7 +3,10 @@
   "name": "testimonial-card",
   "title": "Testimonial Card",
   "description": "A testimonial card with avatar, quote, and author details.",
-  "dependencies": ["avatar", "class-variance-authority"],
+  "dependencies": [
+    "avatar",
+    "class-variance-authority"
+  ],
   "files": [
     {
       "path": "registry/orbit/items/testimonial-card/testimonial-card.tsx",

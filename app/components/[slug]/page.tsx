@@ -11,6 +11,7 @@ import {
   CardBackground as ImageCardBackground,
   CardDefault as ImageCardDefault,
 } from "@/registry/orbit/examples/image-card/cards";
+import { PreviewLinkTailwind } from "@/registry/orbit/examples/preview-link/previews";
 import {
   CardDefault,
   CardElevated,
@@ -18,6 +19,7 @@ import {
 } from "@/registry/orbit/examples/testimonial-card/cards";
 import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
 import { ImageCard } from "@/registry/orbit/items/image-card/image-card";
+import { PreviewLink } from "@/registry/orbit/items/preview-link/preview-link";
 import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
 
 interface ComponentExample {
@@ -82,6 +84,16 @@ const examplesMap: Record<string, ComponentExample[]> = {
 />`,
     },
   ],
+  "preview-link": [
+    {
+      title: "Screenshot",
+      description: "Fetches a live screenshot of the URL on hover.",
+      preview: <PreviewLinkTailwind />,
+      code: `<PreviewLink url="https://tailwindcss.com" className="text-xl font-bold" useScreenshot>
+  Tailwind CSS
+</PreviewLink>`,
+    },
+  ],
   "image-card": [
     {
       title: "Default",
@@ -115,6 +127,11 @@ const examplesMap: Record<string, ComponentExample[]> = {
 
 // Map of slug → preview component
 const componentMap: Record<string, React.ReactNode> = {
+  "preview-link": (
+    <PreviewLink url="https://tailwindcss.com" className="text-xl font-bold" useScreenshot>
+      Tailwind CSS
+    </PreviewLink>
+  ),
   "testimonial-card": (
     <TestimonialCard
       avatar="https://github.com/shadcn.png"
@@ -147,6 +164,15 @@ const componentMap: Record<string, React.ReactNode> = {
 
 // Map of slug → usage example
 const usageMap: Record<string, string> = {
+  "preview-link": `import { PreviewLink } from "@/components/preview-link"
+
+export default function Page() {
+  return (
+    <PreviewLink url="https://tailwindcss.com" useScreenshot>
+      Tailwind CSS
+    </PreviewLink>
+  )
+}`,
   "testimonial-card": `import { TestimonialCard } from "@/components/testimonial-card"
 
 export default function Page() {

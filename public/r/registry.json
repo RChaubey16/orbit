@@ -28,6 +28,32 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "image-card",
+      "type": "registry:ui",
+      "title": "Image Card",
+      "description": "A linked card with an image, title, subtitle, and description.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/orbit/items/image-card/image-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "preview-link",
+      "type": "registry:ui",
+      "title": "Preview Link",
+      "description": "A hover card that shows a live screenshot or image preview when hovering over a link.",
+      "dependencies": ["motion/react", "radix-ui"],
+      "files": [
+        {
+          "path": "registry/orbit/items/preview-link/preview-link.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
