@@ -3,10 +3,7 @@
   "name": "image-card",
   "title": "Image Card",
   "description": "A linked card with an image, title, subtitle, and description.",
-  "dependencies": [
-    "class-variance-authority",
-    "lucide-react"
-  ],
+  "dependencies": ["class-variance-authority", "lucide-react"],
   "files": [
     {
       "path": "registry/orbit/items/image-card/image-card.tsx",
