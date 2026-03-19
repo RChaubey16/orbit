@@ -31,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn("font-sans", inter.variable)} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} border-border/40 mx-auto min-h-[calc(100vh-3.5rem)] max-w-360 border-r border-l px-4 antialiased`}
+      >
         <ThemeProvider>
           <Navbar />
           {children}

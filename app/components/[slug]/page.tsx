@@ -6,10 +6,7 @@ import { Orbit } from "lucide-react";
 import { ComponentPreview } from "@/components/component-preview";
 import { CopyButton } from "@/components/copy-button";
 import { highlightCode } from "@/lib/highlight";
-import {
-  CardDefault as IconCardDefault,
-  CardSurface as IconCardSurface,
-} from "@/registry/orbit/examples/icon-card.tsx/cards";
+import { CardSurface as IconCardSurface } from "@/registry/orbit/examples/icon-card.tsx/cards";
 import {
   CardDefault,
   CardElevated,
@@ -67,18 +64,6 @@ const examplesMap: Record<string, ComponentExample[]> = {
     },
   ],
   "icon-card": [
-    {
-      title: "Default",
-      description: "A minimal icon card with a call-to-action link.",
-      preview: <IconCardDefault />,
-      code: `<IconCard
-  icon={<Orbit />}
-  title="Professional services."
-  description="Get tailored guidance from Stripe on implementation, complex integrations, or major migrations."
-  ctaTitle="Contact sales"
-  ctaLink="#"
-/>`,
-    },
     {
       title: "Surface",
       description: "An icon card with a raised surface background and custom color.",
