@@ -4,30 +4,6 @@
   "homepage": "https://orbit.ruturaj.xyz",
   "items": [
     {
-      "name": "hello-world",
-      "type": "registry:block",
-      "title": "Hello World",
-      "description": "A simple hello world component.",
-      "files": [
-        {
-          "path": "registry/orbit/items/hello-world/hello-world.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "shiny-button",
-      "type": "registry:block",
-      "title": "Shiny Button",
-      "description": "A shiny button component.",
-      "files": [
-        {
-          "path": "registry/orbit/items/shiny-button/shiny-button.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
       "name": "testimonial-card",
       "type": "registry:ui",
       "title": "Testimonial Card",
@@ -49,19 +25,6 @@
       "files": [
         {
           "path": "registry/orbit/items/icon-card/icon-card.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "image-card",
-      "type": "registry:ui",
-      "title": "Image Card",
-      "description": "A card with an image, title, subtitle, and description.",
-      "dependencies": ["class-variance-authority"],
-      "files": [
-        {
-          "path": "registry/orbit/items/image-card/image-card.tsx",
           "type": "registry:component"
         }
       ]

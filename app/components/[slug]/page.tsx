@@ -16,10 +16,8 @@ import {
   CardDefault as ImageCardDefault,
   CardBackground as ImageCardBackground,
 } from "@/registry/orbit/examples/image-card/cards";
-import { HelloWorld } from "@/registry/orbit/items/hello-world/hello-world";
 import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
 import { ImageCard } from "@/registry/orbit/items/image-card/image-card";
-import { ShinyButton } from "@/registry/orbit/items/shiny-button/shiny-button";
 import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
 
 interface ComponentExample {
@@ -117,8 +115,6 @@ const examplesMap: Record<string, ComponentExample[]> = {
 
 // Map of slug → preview component
 const componentMap: Record<string, React.ReactNode> = {
-  "shiny-button": <ShinyButton />,
-  "hello-world": <HelloWorld />,
   "testimonial-card": (
     <TestimonialCard
       avatar="https://github.com/shadcn.png"
@@ -151,16 +147,6 @@ const componentMap: Record<string, React.ReactNode> = {
 
 // Map of slug → usage example
 const usageMap: Record<string, string> = {
-  "shiny-button": `import { ShinyButton } from "@/components/shiny-button"
-
-export default function Page() {
-  return <ShinyButton text="Get Started" />
-}`,
-  "hello-world": `import { HelloWorld } from "@/components/hello-world"
-
-export default function Page() {
-  return <HelloWorld />
-}`,
   "testimonial-card": `import { TestimonialCard } from "@/components/testimonial-card"
 
 export default function Page() {
