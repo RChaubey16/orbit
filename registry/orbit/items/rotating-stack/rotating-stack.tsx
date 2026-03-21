@@ -22,13 +22,13 @@ type Notification = {
   icon?: NotificationIcon;
 };
 
-type RotatingTabsProps = {
+type RotatingStackProps = {
   notifications: Notification[];
   interval?: number;
   className?: string;
 };
 
-const RotatingTabs = ({ notifications, className, interval = 4000 }: RotatingTabsProps) => {
+const RotatingStack = ({ notifications, className, interval = 4000 }: RotatingStackProps) => {
   const [stack, setStack] = useState(notifications);
 
   const cycle = () => setStack(([first, ...rest]) => [...rest, first]);
@@ -112,4 +112,4 @@ const RotatingTabs = ({ notifications, className, interval = 4000 }: RotatingTab
   );
 };
 
-export default RotatingTabs;
+export default RotatingStack;

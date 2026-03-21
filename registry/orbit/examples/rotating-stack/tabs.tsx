@@ -1,6 +1,6 @@
 import { Earth, Star } from "lucide-react";
 
-import RotatingTabs from "../../items/rotating-tabs/rotating-tabs";
+import RotatingStack from "../../items/rotating-stack/rotating-stack";
 
 const IconTabs = () => {
   const notifications = [
@@ -26,7 +26,7 @@ const IconTabs = () => {
       cta: "Go to settings",
     },
   ];
-  return <RotatingTabs notifications={notifications} />;
+  return <RotatingStack notifications={notifications} />;
 };
 
 export { IconTabs };

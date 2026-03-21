@@ -1,4 +1,4 @@
-import { IconTabs } from "@/registry/orbit/examples/rotating-tabs/tabs";
+import { IconTabs } from "@/registry/orbit/examples/rotating-stack/tabs";
 
 export default function Play() {
   return (

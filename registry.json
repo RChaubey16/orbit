@@ -54,6 +54,19 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "rotating-stack",
+      "type": "registry:ui",
+      "title": "Rotating Stack",
+      "description": "An animated notification stack that cycles through items automatically.",
+      "dependencies": ["motion/react", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/orbit/items/rotating-stack/rotating-stack.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
