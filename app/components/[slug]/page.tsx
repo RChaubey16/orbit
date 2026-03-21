@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
-import { Orbit } from "lucide-react";
+import { Earth, Orbit, Star } from "lucide-react";
 
 import { ComponentPreview } from "@/components/component-preview";
 import { CopyButton } from "@/components/copy-button";
@@ -12,6 +12,7 @@ import {
   CardDefault as ImageCardDefault,
 } from "@/registry/orbit/examples/image-card/cards";
 import { PreviewLinkTailwind } from "@/registry/orbit/examples/preview-link/previews";
+import { IconTabs } from "@/registry/orbit/examples/rotating-stack/tabs";
 import {
   CardDefault,
   CardElevated,
@@ -20,6 +21,7 @@ import {
 import { IconCard } from "@/registry/orbit/items/icon-card/icon-card";
 import { ImageCard } from "@/registry/orbit/items/image-card/image-card";
 import { PreviewLink } from "@/registry/orbit/items/preview-link/preview-link";
+import RotatingStack from "@/registry/orbit/items/rotating-stack/rotating-stack";
 import { TestimonialCard } from "@/registry/orbit/items/testimonial-card/testimonial-card";
 
 interface ComponentExample {
@@ -94,6 +96,37 @@ const examplesMap: Record<string, ComponentExample[]> = {
 </PreviewLink>`,
     },
   ],
+  "rotating-stack": [
+    {
+      title: "With Icons",
+      description: "Notifications with image and React node icons.",
+      preview: <IconTabs />,
+      code: `import { Earth, Star } from "lucide-react"
+
+const notifications = [
+  {
+    id: 1,
+    icon: { src: "/vercel.svg", alt: "Vercel logo" },
+    message: "Vercel has shipped a new feature",
+    cta: "Explore",
+  },
+  {
+    id: 2,
+    icon: <Star className="h-5 w-5" />,
+    message: "Your deployment is ready to preview",
+    cta: "View deploy",
+  },
+  {
+    id: 3,
+    icon: <Earth className="h-5 w-5" />,
+    message: "Domain verification successful",
+    cta: "Go to settings",
+  },
+]
+
+<RotatingStack notifications={notifications} />`,
+    },
+  ],
   "image-card": [
     {
       title: "Default",
@@ -150,6 +183,30 @@ const componentMap: Record<string, React.ReactNode> = {
       ctaLink="#"
     />
   ),
+  "rotating-stack": (
+    <RotatingStack
+      notifications={[
+        {
+          id: 1,
+          icon: { src: "/vercel.svg", alt: "Vercel logo" },
+          message: "Vercel has shipped a new feature",
+          cta: "Explore",
+        },
+        {
+          id: 2,
+          icon: <Star className="h-5 w-5" />,
+          message: "Your deployment is ready to preview",
+          cta: "View deploy",
+        },
+        {
+          id: 3,
+          icon: <Earth className="h-5 w-5" />,
+          message: "Domain verification successful",
+          cta: "Go to settings",
+        },
+      ]}
+    />
+  ),
   "image-card": (
     <ImageCard
       title="Professional services"
@@ -197,6 +254,19 @@ export default function Page() {
       description="Get tailored guidance on implementation."
       ctaTitle="Contact sales"
       ctaLink="#"
+    />
+  )
+}`,
+  "rotating-stack": `import RotatingStack from "@/components/rotating-stack"
+
+export default function Page() {
+  return (
+    <RotatingStack
+      notifications={[
+        { id: 1, message: "Vercel has shipped a new feature", cta: "Explore" },
+        { id: 2, message: "Your deployment is ready to preview", cta: "View deploy" },
+        { id: 3, message: "Domain verification successful", cta: "Go to settings" },
+      ]}
     />
   )
 }`,

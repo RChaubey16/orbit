@@ -63,51 +63,49 @@ const RotatingStack = ({ notifications, className, interval = 4000 }: RotatingSt
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className={cn("relative h-[60px] w-[460px]", className)}>
-        {/* Stacked background cards */}
-        {stack.slice(1, 3).map((item, i) => (
-          <motion.div
-            key={item.id}
-            className="bg-background absolute inset-0 rounded-2xl border"
-            animate={{
-              y: -(i + 1) * 10,
-              scaleX: 1 - (i + 1) * 0.04,
-              opacity: 1 - (i + 1) * 0.35,
-            }}
-            transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
-            style={{ zIndex: 10 - (i + 1) }}
-          />
-        ))}
+    <div className={cn("relative h-[60px] w-[460px]", className)}>
+      {/* Stacked background cards */}
+      {stack.slice(1, 3).map((item, i) => (
+        <motion.div
+          key={item.id}
+          className="bg-background absolute inset-0 rounded-2xl border"
+          animate={{
+            y: -(i + 1) * 10,
+            scaleX: 1 - (i + 1) * 0.04,
+            opacity: 1 - (i + 1) * 0.35,
+          }}
+          transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+          style={{ zIndex: 10 - (i + 1) }}
+        />
+      ))}
 
-        {/* Front card */}
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={stack[0].id}
-            initial={{ y: -24, opacity: 0, scale: 0.94 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 32, opacity: 0, scale: 0.96 }}
-            transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
-            className="bg-card absolute inset-0 z-20 flex items-center gap-3 rounded-2xl border px-4 shadow-sm"
+      {/* Front card */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={stack[0].id}
+          initial={{ y: -24, opacity: 0, scale: 0.94 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          exit={{ y: 32, opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+          className="bg-card absolute inset-0 z-20 flex items-center gap-3 rounded-2xl border px-4 shadow-sm"
+        >
+          {stack[0].icon && (
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
+              {renderIcon(stack[0].icon)}
+            </div>
+          )}
+
+          <p className="text-foreground flex-1 text-sm">{stack[0].message}</p>
+
+          <button
+            onClick={cycle}
+            className="text-muted-foreground hover:bg-muted hover:text-foreground flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm transition-colors"
           >
-            {stack[0].icon && (
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
-                {renderIcon(stack[0].icon)}
-              </div>
-            )}
-
-            <p className="text-foreground flex-1 text-sm">{stack[0].message}</p>
-
-            <button
-              onClick={cycle}
-              className="text-muted-foreground hover:bg-muted hover:text-foreground flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm transition-colors"
-            >
-              {stack[0].cta}
-              <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+            {stack[0].cta}
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
