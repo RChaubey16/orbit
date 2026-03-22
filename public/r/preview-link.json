@@ -3,10 +3,7 @@
   "name": "preview-link",
   "title": "Preview Link",
   "description": "A hover card that shows a live screenshot or image preview when hovering over a link.",
-  "dependencies": [
-    "motion/react",
-    "radix-ui"
-  ],
+  "dependencies": ["motion/react", "radix-ui"],
   "files": [
     {
       "path": "registry/orbit/items/preview-link/preview-link.tsx",

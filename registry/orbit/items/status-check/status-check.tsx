@@ -65,8 +65,8 @@ export function StatusCheck({
         disabled={status === "processing"}
         className={cn(
           "relative flex cursor-pointer items-center gap-3 overflow-hidden",
-          "rounded-full border border-border bg-card px-5 py-3",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "border-border bg-card rounded-full border px-5 py-3",
+          "focus-visible:ring-ring focus-visible:ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
           "disabled:cursor-not-allowed",
         )}
         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
@@ -118,14 +118,14 @@ export function StatusCheck({
             transition={{ duration: 0.22, ease: "easeOut" }}
             className="flex min-w-0 flex-col items-start"
           >
-            <span className="whitespace-nowrap text-sm font-medium leading-tight text-card-foreground">
+            <span className="text-card-foreground text-sm leading-tight font-medium whitespace-nowrap">
               {cfg.label}
             </span>
             {cfg.sublabel && (
               <motion.span
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
-                className="overflow-hidden whitespace-nowrap text-xs leading-tight text-muted-foreground"
+                className="text-muted-foreground overflow-hidden text-xs leading-tight whitespace-nowrap"
               >
                 {cfg.sublabel}
               </motion.span>
@@ -159,7 +159,7 @@ export function StatusCheck({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.3 }}
-            className="text-xs text-muted-foreground"
+            className="text-muted-foreground text-xs"
           >
             Click to reset
           </motion.p>

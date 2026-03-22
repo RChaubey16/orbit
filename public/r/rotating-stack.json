@@ -3,10 +3,7 @@
   "name": "rotating-stack",
   "title": "Rotating Stack",
   "description": "An animated notification stack that cycles through items automatically.",
-  "dependencies": [
-    "motion/react",
-    "lucide-react"
-  ],
+  "dependencies": ["motion/react", "lucide-react"],
   "files": [
     {
       "path": "registry/orbit/items/rotating-stack/rotating-stack.tsx",

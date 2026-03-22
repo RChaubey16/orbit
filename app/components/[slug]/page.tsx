@@ -1,10 +1,12 @@
 import fs from "fs";
 import path from "path";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Earth, Orbit, Star } from "lucide-react";
 
 import { ComponentPreview } from "@/components/component-preview";
 import { CopyButton } from "@/components/copy-button";
+import { InstallTabs } from "@/components/install-tabs";
 import { highlightCode } from "@/lib/highlight";
 import { CardSurface as IconCardSurface } from "@/registry/orbit/examples/icon-card.tsx/cards";
 import {
@@ -385,6 +387,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+const BASE_URL = "https://orbit.ruturaj.xyz/r";
+
 export default async function ComponentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const item = getRegistryItem(slug);
@@ -392,90 +396,101 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   if (!item) notFound();
 
   const sourceCode = item.files[0]?.content ?? "";
-  const installCommand = `pnpm dlx shadcn@latest add https://orbit.ruturaj.xyz/r/${item.name}.json`;
   const usage = usageMap[slug] ?? "";
   const preview = componentMap[slug] ?? null;
   const examples = examplesMap[slug] ?? [];
 
-  const [highlightedSource, highlightedInstall, highlightedUsage, ...highlightedExamples] =
+  const installCommands = {
+    pnpm: `pnpm dlx shadcn@latest add ${BASE_URL}/${item.name}.json`,
+    npm: `npx shadcn@latest add ${BASE_URL}/${item.name}.json`,
+    yarn: `yarn dlx shadcn@latest add ${BASE_URL}/${item.name}.json`,
+    bun: `bunx --bun shadcn@latest add ${BASE_URL}/${item.name}.json`,
+  };
+
+  const [highlightedSource, pnpmH, npmH, yarnH, bunH, highlightedUsage, ...highlightedExamples] =
     await Promise.all([
       highlightCode(sourceCode, "tsx"),
-      highlightCode(installCommand, "bash"),
+      highlightCode(installCommands.pnpm, "bash"),
+      highlightCode(installCommands.npm, "bash"),
+      highlightCode(installCommands.yarn, "bash"),
+      highlightCode(installCommands.bun, "bash"),
       usage ? highlightCode(usage, "tsx") : Promise.resolve(""),
       ...examples.map((ex) => highlightCode(ex.code, "tsx")),
     ]);
 
+  const highlightedInstall = { pnpm: pnpmH, npm: npmH, yarn: yarnH, bun: bunH };
+
   return (
-    <div className="bg-background min-h-screen">
-      <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8 lg:py-24">
-        {/* Title & Description */}
-        <div className="space-y-2">
-          <h1 className="text-foreground text-3xl font-bold tracking-tight">{item.title}</h1>
-          <p className="text-muted-foreground text-base">{item.description}</p>
-        </div>
-
-        {/* Preview */}
-        <div className="mt-12">
-          <ComponentPreview code={sourceCode} highlightedCode={highlightedSource}>
-            {preview}
-          </ComponentPreview>
-        </div>
-
-        {/* Installation */}
-        <div className="mt-16">
-          <h2 className="text-foreground text-xl font-semibold tracking-tight">Installation</h2>
-          <div className="border-border relative mt-4 overflow-hidden rounded-lg border">
-            <CopyButton
-              value={installCommand}
-              className="text-muted-foreground hover:text-foreground absolute top-4 right-4 z-10"
-            />
-            <div
-              className="[&_code]:font-mono [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: highlightedInstall }}
-            />
-          </div>
-        </div>
-
-        {/* Usage */}
-        {usage && (
-          <div className="mt-16">
-            <h2 className="text-foreground text-xl font-semibold tracking-tight">Usage</h2>
-            <div className="border-border relative mt-4 overflow-hidden rounded-lg border">
-              <CopyButton
-                value={usage}
-                className="text-muted-foreground hover:text-foreground absolute top-4 right-4 z-10"
-              />
-              <div
-                className="[&_code]:font-mono [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: highlightedUsage }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Examples */}
-        {examples.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-foreground text-xl font-semibold tracking-tight">Examples</h2>
-            <div className="mt-6 space-y-12">
-              {examples.map((example, index) => (
-                <div key={example.title}>
-                  <h3 className="text-foreground text-lg font-medium">{example.title}</h3>
-                  <p className="text-muted-foreground mt-1 text-sm">{example.description}</p>
-                  <div className="mt-4">
-                    <ComponentPreview
-                      code={example.code}
-                      highlightedCode={highlightedExamples[index]}
-                    >
-                      {example.preview}
-                    </ComponentPreview>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+    <div className="mx-auto max-w-3xl py-12">
+      {/* Breadcrumb */}
+      <div className="text-muted-foreground mb-8 flex items-center gap-2 text-sm">
+        <Link href="/components" className="hover:text-foreground transition-colors">
+          Components
+        </Link>
+        <span>/</span>
+        <span className="text-foreground">{item.title}</span>
       </div>
+
+      {/* Title & Description */}
+      <h1 className="text-foreground text-3xl font-bold tracking-tight">{item.title}</h1>
+      <p className="text-muted-foreground mt-2 text-base">{item.description}</p>
+      <div className="bg-border mt-6 h-px" />
+
+      {/* Preview */}
+      <div className="mt-10">
+        <ComponentPreview code={sourceCode} highlightedCode={highlightedSource}>
+          {preview}
+        </ComponentPreview>
+      </div>
+
+      {/* Installation */}
+      <div className="mt-12">
+        <h2 className="text-muted-foreground mb-4 text-sm font-semibold tracking-widest uppercase">
+          Installation
+        </h2>
+        <InstallTabs commands={installCommands} highlighted={highlightedInstall} />
+      </div>
+
+      {/* Usage */}
+      {usage && (
+        <div className="mt-12">
+          <h2 className="text-muted-foreground mb-4 text-sm font-semibold tracking-widest uppercase">
+            Usage
+          </h2>
+          <div className="relative overflow-hidden rounded-lg border">
+            <CopyButton value={usage} className="absolute top-3 right-3 z-10" />
+            <div
+              className="[&_pre]:overflow-x-auto [&_pre]:p-5 [&_pre]:text-sm [&_pre]:leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: highlightedUsage }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Examples */}
+      {examples.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-muted-foreground mb-6 text-sm font-semibold tracking-widest uppercase">
+            Examples
+          </h2>
+          <div className="space-y-10">
+            {examples.map((example, index) => (
+              <div key={example.title}>
+                <p className="text-foreground text-base font-medium">{example.title}</p>
+                <p className="text-muted-foreground mt-1 text-sm">{example.description}</p>
+                <div className="mt-4">
+                  <ComponentPreview
+                    code={example.code}
+                    highlightedCode={highlightedExamples[index]}
+                  >
+                    {example.preview}
+                  </ComponentPreview>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

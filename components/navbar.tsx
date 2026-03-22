@@ -2,12 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronRight, Github, Menu, Orbit, X } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isComponents = pathname.startsWith("/components");
 
   return (
     <header className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 w-full backdrop-blur">
@@ -21,7 +24,11 @@ export function Navbar() {
         <div className="ml-auto hidden items-center gap-6 md:flex">
           <Link
             href="/components"
-            className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-md px-4 py-2 transition-colors"
+            className={`rounded-md px-4 py-2 transition-colors ${
+              isComponents
+                ? "bg-muted text-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            }`}
           >
             Components
           </Link>
@@ -80,7 +87,11 @@ export function Navbar() {
           <Link
             href="/components"
             onClick={() => setMobileOpen(false)}
-            className="text-foreground/80 hover:bg-muted hover:text-foreground group flex items-center justify-between rounded-lg px-3 py-3 text-sm font-medium transition-colors"
+            className={`group flex items-center justify-between rounded-lg px-3 py-3 text-sm font-medium transition-colors ${
+              isComponents
+                ? "bg-muted text-foreground"
+                : "text-foreground/80 hover:bg-muted hover:text-foreground"
+            }`}
           >
             <span>Components</span>
             <ChevronRight className="text-muted-foreground size-4 transition-transform duration-150 group-hover:translate-x-0.5" />

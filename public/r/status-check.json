@@ -3,10 +3,7 @@
   "name": "status-check",
   "title": "Status Check",
   "description": "A dynamic island–style pill that animates through transaction states: idle, processing, completed, and failed.",
-  "dependencies": [
-    "motion/react",
-    "lucide-react"
-  ],
+  "dependencies": ["motion/react", "lucide-react"],
   "files": [
     {
       "path": "registry/orbit/items/status-check/status-check.tsx",
