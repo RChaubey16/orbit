@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { Globe } from "lucide-react";
 import {
@@ -12,8 +12,15 @@ import {
   useTransform,
 } from "motion/react";
 
+type Feature = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  content: React.ReactNode;
+};
+
 const MotionHooksExample = () => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -48,8 +55,8 @@ const MotionHooksExample = () => {
   );
 };
 
-const Card = ({ feature }) => {
-  const ref = useRef(null);
+const Card = ({ feature }: { feature: Feature }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"], // element = start, viewport = end --- I want the scroll tracking to start
