@@ -14,6 +14,12 @@ import {
 import { PreviewLinkTailwind } from "@/registry/orbit/examples/preview-link/previews";
 import { IconTabs } from "@/registry/orbit/examples/rotating-stack/tabs";
 import {
+  StatusCheckCharge,
+  StatusCheckDefault,
+  StatusCheckDeploy,
+  StatusCheckFail,
+} from "@/registry/orbit/examples/status-check/demos";
+import {
   CardDefault,
   CardElevated,
   CardInset,
@@ -127,6 +133,49 @@ const notifications = [
 <RotatingStack notifications={notifications} />`,
     },
   ],
+  "status-check": [
+    {
+      title: "Failure",
+      description: "Same config with simulateFailure to always end in the failed state.",
+      preview: <StatusCheckFail />,
+      code: `import { ArrowRight, CheckCircle2, Loader2, XCircle } from "lucide-react"
+
+<StatusCheck
+  simulateFailure
+  idle={{ label: "Start Transaction", icon: ArrowRight, dotColor: "#9ca3af", iconClass: "text-muted-foreground" }}
+  processing={{ label: "Processing", sublabel: "Verifying payment...", icon: Loader2, iconClass: "text-blue-400", dotColor: "#60a5fa", spin: true }}
+  completed={{ label: "Completed", sublabel: "Payment successful", icon: CheckCircle2, iconClass: "text-emerald-400", dotColor: "#34d399", glowColor: "#34d399" }}
+  failed={{ label: "Failed", sublabel: "Transaction declined", icon: XCircle, iconClass: "text-red-400", dotColor: "#f87171", glowColor: "#f87171" }}
+/>`,
+    },
+    {
+      title: "Deploy",
+      description: "Custom labels and icons for a deployment flow.",
+      preview: <StatusCheckDeploy />,
+      code: `import { CloudUpload, Loader2, Rocket, ServerCrash } from "lucide-react"
+
+<StatusCheck
+  idle={{ label: "Deploy to Production", icon: Rocket, dotColor: "#9ca3af", iconClass: "text-muted-foreground" }}
+  processing={{ label: "Deploying", sublabel: "Building your project...", icon: Loader2, iconClass: "text-violet-400", dotColor: "#a78bfa", spin: true }}
+  completed={{ label: "Live", sublabel: "Deployment successful", icon: CloudUpload, iconClass: "text-emerald-400", dotColor: "#34d399", glowColor: "#34d399" }}
+  failed={{ label: "Build Failed", sublabel: "Check your logs", icon: ServerCrash, iconClass: "text-red-400", dotColor: "#f87171", glowColor: "#f87171" }}
+  processingDuration={3000}
+/>`,
+    },
+    {
+      title: "Charge",
+      description: "Custom labels and colors for a payment charge flow.",
+      preview: <StatusCheckCharge />,
+      code: `import { CheckCircle2, Loader2, XCircle, Zap } from "lucide-react"
+
+<StatusCheck
+  idle={{ label: "Charge Card", icon: Zap, dotColor: "#9ca3af", iconClass: "text-muted-foreground" }}
+  processing={{ label: "Charging", sublabel: "Contacting bank...", icon: Loader2, iconClass: "text-amber-400", dotColor: "#fbbf24", spin: true }}
+  completed={{ label: "Charged", sublabel: "$49.00 collected", icon: CheckCircle2, iconClass: "text-emerald-400", dotColor: "#34d399", glowColor: "#34d399" }}
+  failed={{ label: "Declined", sublabel: "Card was declined", icon: XCircle, iconClass: "text-red-400", dotColor: "#f87171", glowColor: "#f87171" }}
+/>`,
+    },
+  ],
   "image-card": [
     {
       title: "Default",
@@ -207,6 +256,7 @@ const componentMap: Record<string, React.ReactNode> = {
       ]}
     />
   ),
+  "status-check": <StatusCheckDefault />,
   "image-card": (
     <ImageCard
       title="Professional services"
@@ -267,6 +317,19 @@ export default function Page() {
         { id: 2, message: "Your deployment is ready to preview", cta: "View deploy" },
         { id: 3, message: "Domain verification successful", cta: "Go to settings" },
       ]}
+    />
+  )
+}`,
+  "status-check": `import { ArrowRight, CheckCircle2, Loader2, XCircle } from "lucide-react"
+import { StatusCheck } from "@/components/status-check"
+
+export default function Page() {
+  return (
+    <StatusCheck
+      idle={{ label: "Start Transaction", icon: ArrowRight, dotColor: "#9ca3af", iconClass: "text-muted-foreground" }}
+      processing={{ label: "Processing", sublabel: "Verifying payment...", icon: Loader2, iconClass: "text-blue-400", dotColor: "#60a5fa", spin: true }}
+      completed={{ label: "Completed", sublabel: "Payment successful", icon: CheckCircle2, iconClass: "text-emerald-400", dotColor: "#34d399", glowColor: "#34d399" }}
+      failed={{ label: "Failed", sublabel: "Transaction declined", icon: XCircle, iconClass: "text-red-400", dotColor: "#f87171", glowColor: "#f87171" }}
     />
   )
 }`,
