@@ -35,7 +35,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-1">
             <Link
-              href="https://github.com/ruturaj"
+              href="https://github.com/RChaubey16/orbit"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors"
