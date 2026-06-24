@@ -1,19 +1,45 @@
+import type { Metadata } from "next";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { codeToHtml } from "shiki";
 import { KeyboardButton } from "@/components/button";
 import { CopyButton } from "@/components/copy-button";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
+import { PreviewTabs } from "@/components/preview-tabs";
+
+export const metadata: Metadata = {
+  title: "Keyboard Button",
+  description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
+  openGraph: {
+    title: "Keyboard Button · Orbit",
+    description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
+  },
+  twitter: {
+    title: "Keyboard Button · Orbit",
+    description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
+  },
+};
 
 const REGISTRY_URL = "http://localhost:3000/r/keyboard-button";
+
+const USAGE_CODE = `import { KeyboardButton } from "@/components/keyboard-button";
+
+export default function Example() {
+  return <KeyboardButton>Click me</KeyboardButton>;
+}`;
 
 export default async function KeyboardButtonPage() {
   const code = readFileSync(join(process.cwd(), "components/button.tsx"), "utf-8");
 
-  const codeHtml = await codeToHtml(code, {
-    lang: "tsx",
-    theme: "github-dark",
-  });
+  const displayCode = code.replace(
+    /const CLICK_SOUND = "data:audio\/mp3;base64,[A-Za-z0-9+/=]+"/,
+    'const CLICK_SOUND = "data:audio/mp3;base64,..."'
+  );
+
+  const [codeHtml, usageHtml] = await Promise.all([
+    codeToHtml(displayCode, { lang: "tsx", theme: "github-dark" }),
+    codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" }),
+  ]);
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16 font-sans">
@@ -34,9 +60,9 @@ export default async function KeyboardButtonPage() {
         <h2 className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-4">
           Preview
         </h2>
-        <div className="flex items-center justify-center h-48 rounded-xl border border-zinc-200 bg-zinc-50">
+        <PreviewTabs codeHtml={usageHtml} rawCode={USAGE_CODE}>
           <KeyboardButton>Click me</KeyboardButton>
-        </div>
+        </PreviewTabs>
       </section>
 
       <section className="mb-12">
@@ -45,8 +71,7 @@ export default async function KeyboardButtonPage() {
         </h2>
         <PackageManagerTabs registryUrl={REGISTRY_URL} />
         <p className="mt-3 text-xs text-zinc-400">
-          Also add a click sound at{" "}
-          <code className="font-mono">public/sounds/keyboard-click.mp3</code>.
+          The click sound is bundled with the component — no extra files needed.
         </p>
       </section>
 
