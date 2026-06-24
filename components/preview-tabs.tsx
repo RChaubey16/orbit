@@ -33,13 +33,11 @@ export function PreviewTabs({ children, codeHtml, rawCode }: PreviewTabsProps) {
         ))}
       </div>
 
-      {active === "Preview" && (
+      {active === "Preview" ? (
         <div className="flex items-center justify-center h-48 bg-zinc-50">
           {children}
         </div>
-      )}
-
-      {active === "Code" && (
+      ) : (
         <div className="relative bg-zinc-900">
           <div className="absolute top-3.5 right-4 z-10">
             <CopyButton text={rawCode} />

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-const REGISTRY_URL = "http://localhost:3000/r/keyboard-button";
+const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/keyboard-button`;
 
 const USAGE_CODE = `import { KeyboardButton } from "@/components/keyboard-button";
 
@@ -28,14 +28,14 @@ export default function Example() {
   return <KeyboardButton>Click me</KeyboardButton>;
 }`;
 
+const sourceCode = readFileSync(join(process.cwd(), "components/button.tsx"), "utf-8");
+
+const displayCode = sourceCode.replace(
+  /const CLICK_SOUND = "data:audio\/mp3;base64,[A-Za-z0-9+/=]+"/,
+  'const CLICK_SOUND = "data:audio/mp3;base64,..."'
+);
+
 export default async function KeyboardButtonPage() {
-  const code = readFileSync(join(process.cwd(), "components/button.tsx"), "utf-8");
-
-  const displayCode = code.replace(
-    /const CLICK_SOUND = "data:audio\/mp3;base64,[A-Za-z0-9+/=]+"/,
-    'const CLICK_SOUND = "data:audio/mp3;base64,..."'
-  );
-
   const [codeHtml, usageHtml] = await Promise.all([
     codeToHtml(displayCode, { lang: "tsx", theme: "github-dark" }),
     codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" }),
@@ -81,7 +81,7 @@ export default async function KeyboardButtonPage() {
         </h2>
         <div className="relative rounded-xl overflow-hidden">
           <div className="absolute top-3.5 right-4 z-10">
-            <CopyButton text={code} />
+            <CopyButton text={sourceCode} />
           </div>
           <div
             className="text-sm [&>pre]:p-5 [&>pre]:overflow-x-auto [&>pre]:rounded-xl [&>pre]:leading-relaxed"
