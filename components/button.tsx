@@ -2,11 +2,11 @@
 
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface KeyboardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-export function Button({ children, className = "", disabled, ...props }: ButtonProps) {
+export function KeyboardButton({ children, className = "", disabled, ...props }: KeyboardButtonProps) {
   const [pressed, setPressed] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
