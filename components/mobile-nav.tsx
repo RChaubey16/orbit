@@ -4,20 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { components } from "@/lib/registry";
 
-export function Sidebar() {
+export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:block w-52 shrink-0 border-r border-zinc-100 sticky top-14 self-start h-[calc(100vh-3.5rem)] overflow-y-auto py-8 px-3">
-      <p className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-2 px-2">
-        Components
-      </p>
-      <nav className="flex flex-col gap-0.5">
+    <nav className="md:hidden border-b border-zinc-100 bg-white overflow-x-auto">
+      <div className="flex gap-1 px-4 py-2 min-w-max">
         {components.map((component) => (
           <Link
             key={component.name}
             href={component.href}
-            className={`rounded-md px-2 py-1.5 text-sm transition-colors ${
+            className={`shrink-0 rounded-md px-3 py-1.5 text-sm transition-colors whitespace-nowrap ${
               pathname === component.href
                 ? "bg-zinc-100 text-zinc-900 font-medium"
                 : "text-zinc-500 hover:text-zinc-800 hover:bg-zinc-50"
@@ -26,7 +23,7 @@ export function Sidebar() {
             {component.title}
           </Link>
         ))}
-      </nav>
-    </aside>
+      </div>
+    </nav>
   );
 }

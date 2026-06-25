@@ -42,7 +42,7 @@ export default async function KeyboardButtonPage() {
   ]);
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16 font-sans">
+    <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 sm:py-16 font-sans">
       <div className="mb-12">
         <p className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-3">
           Components

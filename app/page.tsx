@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { components } from "@/lib/registry";
-import { previews } from "@/lib/previews";
 
 export const metadata: Metadata = {
   title: "Orbit — Components built to feel different",
@@ -18,9 +17,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="px-20 py-20">
-      <div className="mb-20">
-        <h1 className="text-5xl font-semibold tracking-tight text-zinc-900 leading-tight">
+    <div className="px-4 py-10 sm:px-12 sm:py-16 md:px-20 md:py-20">
+      <div className="mb-12 md:mb-20">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-zinc-900 leading-tight">
           Components built to<br />feel different.
         </h1>
         <p className="mt-5 text-lg text-zinc-500 max-w-md leading-relaxed">
@@ -43,14 +42,9 @@ export default function Home() {
             <Link
               key={component.name}
               href={component.href}
-              className="group rounded-xl border border-zinc-200 overflow-hidden hover:border-zinc-300 transition-colors"
+              className="group rounded-xl border border-zinc-200 px-4 py-3 hover:border-zinc-300 transition-colors"
             >
-              <div className="flex items-center justify-center h-40 bg-zinc-50 pointer-events-none">
-                {previews[component.name]}
-              </div>
-              <div className="px-4 py-3 border-t border-zinc-100">
-                <p className="text-sm font-medium text-zinc-900">{component.title}</p>
-              </div>
+              <p className="text-sm font-medium text-zinc-900">{component.title}</p>
             </Link>
           ))}
         </div>

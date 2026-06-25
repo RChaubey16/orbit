@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ComponentsPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 sm:py-16">
       <div className="mb-10">
         <h1 className="text-3xl font-semibold tracking-tight text-zinc-900">
           Components
