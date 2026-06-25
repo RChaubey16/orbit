@@ -13,11 +13,6 @@ export async function GET(
       title: "Keyboard Button",
       description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
     },
-    "magnetic-button": {
-      file: "components/magnetic-button.tsx",
-      title: "Magnetic Button",
-      description: "A button that pulls toward the cursor and springs back, creating a satisfying magnetic attraction effect.",
-    },
     "confetti-button": {
       file: "components/confetti-button.tsx",
       title: "Confetti Button",

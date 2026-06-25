@@ -6,12 +6,6 @@ export const components = [
     href: "/components/keyboard-button",
   },
   {
-    name: "magnetic-button",
-    title: "Magnetic Button",
-    description: "A button that pulls toward the cursor and springs back, creating a satisfying magnetic attraction effect.",
-    href: "/components/magnetic-button",
-  },
-  {
     name: "confetti-button",
     title: "Confetti Button",
     description: "A button that bursts confetti from the click position, with physics-based particles that drift and fade.",
