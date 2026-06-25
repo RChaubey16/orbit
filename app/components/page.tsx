@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { components } from "@/lib/registry";
+import { ComponentPreview } from "@/components/component-preview";
 
 export const metadata: Metadata = {
   title: "Components",
@@ -25,6 +26,9 @@ export default function ComponentsPage() {
             href={component.href}
             className="rounded-xl border border-zinc-200 p-5 hover:border-zinc-300 hover:bg-zinc-50 transition-colors"
           >
+            <div className="flex items-center justify-center h-24 mb-4 bg-zinc-50 rounded-lg">
+              <ComponentPreview name={component.name} />
+            </div>
             <p className="font-medium text-zinc-900">{component.title}</p>
             <p className="mt-1 text-sm text-zinc-500 leading-relaxed">
               {component.description}
