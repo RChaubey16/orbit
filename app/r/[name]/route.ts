@@ -13,6 +13,11 @@ export async function GET(
       title: "Keyboard Button",
       description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
     },
+    "scramble-text": {
+      file: "components/scramble-text.tsx",
+      title: "Scramble Text",
+      description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    },
     "confetti-button": {
       file: "components/confetti-button.tsx",
       title: "Confetti Button",

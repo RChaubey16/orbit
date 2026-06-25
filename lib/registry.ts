@@ -6,6 +6,12 @@ export const components = [
     href: "/components/keyboard-button",
   },
   {
+    name: "scramble-text",
+    title: "Scramble Text",
+    description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    href: "/components/scramble-text",
+  },
+  {
     name: "confetti-button",
     title: "Confetti Button",
     description: "A button that bursts confetti from the click position, with physics-based particles that drift and fade.",
