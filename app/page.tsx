@@ -26,6 +26,7 @@ const previewHeights: Record<string, string> = {
   "scramble-text":   "h-48",
   "confetti-button": "h-40",
   "flip-counter":    "h-40",
+  "scratch-card":    "h-40",
 };
 
 const VIEW_LINK_CLASS = "absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-zinc-900 hover:border-zinc-300";

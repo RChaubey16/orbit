@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
   title: {
     default: "Orbit",
     template: "%s · Orbit",
@@ -25,11 +26,13 @@ export const metadata: Metadata = {
     title: "Orbit",
     description: "An open-source component library focused on interaction and physical feel.",
     type: "website",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Orbit",
     description: "An open-source component library focused on interaction and physical feel.",
+    images: ["/orbit-home.png"],
   },
 };
 

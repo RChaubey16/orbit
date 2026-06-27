@@ -53,4 +53,16 @@ export const components = [
     description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
     href: "/components/fireworks-button",
   },
+  {
+    name: "glitch-text",
+    title: "Glitch Text",
+    description: "Text with layered chromatic aberration and scan-line displacement, creating a digital corruption effect.",
+    href: "/components/glitch-text",
+  },
+  {
+    name: "scratch-card",
+    title: "Scratch Card",
+    description: "A canvas-based scratch card that reveals hidden content as you draw over it, with auto-reveal once a threshold is reached.",
+    href: "/components/scratch-card",
+  },
 ];

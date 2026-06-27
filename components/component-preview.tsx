@@ -9,6 +9,8 @@ import { FlipCounterDemo } from "@/components/flip-counter-demo";
 import { AuroraBackground } from "@/components/aurora-background";
 import { MagneticButton } from "@/components/magnetic-button";
 import { FireworksButton } from "@/components/fireworks-button";
+import { GlitchText } from "@/components/glitch-text";
+import { ScratchCard } from "@/components/scratch-card";
 
 const previews: Record<string, React.ReactNode> = {
   "keyboard-button": <KeyboardButton>Click me</KeyboardButton>,
@@ -46,6 +48,19 @@ const previews: Record<string, React.ReactNode> = {
   ),
   "magnetic-button": <MagneticButton>Hover near me</MagneticButton>,
   "fireworks-button": <FireworksButton>Launch 🎆</FireworksButton>,
+  "glitch-text": (
+    <GlitchText trigger="always" className="text-xl font-bold text-zinc-900">
+      GLITCH TEXT
+    </GlitchText>
+  ),
+  "scratch-card": (
+    <ScratchCard className="w-40 h-24 rounded-xl" threshold={60}>
+      <div className="w-full h-full rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex flex-col items-center justify-center select-none">
+        <span className="text-2xl">🎉</span>
+        <p className="text-xs font-bold text-white mt-1">You won!</p>
+      </div>
+    </ScratchCard>
+  ),
 };
 
 export function ComponentPreview({ name }: { name: string }) {
