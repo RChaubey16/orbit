@@ -17,4 +17,10 @@ export const components = [
     description: "A button that bursts confetti from the click position, with physics-based particles that drift and fade.",
     href: "/components/confetti-button",
   },
+  {
+    name: "tilt-card",
+    title: "Tilt Card",
+    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    href: "/components/tilt-card",
+  },
 ];

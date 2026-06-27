@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { components } from "@/lib/registry";
+import { PageTransition } from "@/components/page-transition";
 
 export const metadata: Metadata = {
   title: "Orbit — Components built to feel different",
@@ -17,12 +18,12 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="px-4 py-10 sm:px-12 sm:py-16 md:px-20 md:py-20">
-      <div className="mb-12 md:mb-20">
+    <PageTransition>
+      <div className="flex flex-col items-center justify-center min-h-[40vh] px-4 text-center max-w-4xl mx-auto w-full">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-zinc-900 leading-tight">
-          Components built to<br />feel different.
+          Components built to feel different.
         </h1>
-        <p className="mt-5 text-lg text-zinc-500 max-w-md leading-relaxed">
+        <p className="mt-5 text-lg text-zinc-500 max-w-xl leading-relaxed">
           An open-source component library focused on interaction and physical feel. Copy-paste or install via shadcn.
         </p>
         <Link
@@ -33,7 +34,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div>
+      <div className="px-4 pb-16 sm:px-12 md:px-20">
         <p className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-6">
           All components
         </p>
@@ -49,6 +50,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }

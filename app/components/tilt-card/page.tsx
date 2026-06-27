@@ -2,39 +2,44 @@ import type { Metadata } from "next";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { codeToHtml } from "shiki";
-import { ScrambleText } from "@/components/scramble-text";
+import { TiltCard } from "@/components/tilt-card";
 import { CopyButton } from "@/components/copy-button";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { CodeAccordion } from "@/components/code-accordion";
 
 export const metadata: Metadata = {
-  title: "Scramble Text",
-  description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+  title: "Tilt Card",
+  description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
   openGraph: {
-    title: "Scramble Text · Orbit",
-    description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    title: "Tilt Card · Orbit",
+    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
   },
   twitter: {
-    title: "Scramble Text · Orbit",
-    description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    title: "Tilt Card · Orbit",
+    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
   },
 };
 
-const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/scramble-text`;
+const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/tilt-card`;
 
-const USAGE_CODE = `import { ScrambleText } from "@/components/scramble-text";
+const USAGE_CODE = `import { TiltCard } from "@/components/tilt-card";
 
 export default function Example() {
-  return <ScrambleText>Hover over me</ScrambleText>;
+  return (
+    <TiltCard className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md w-64">
+      <p className="text-sm font-semibold text-zinc-900">Tilt Card</p>
+      <p className="mt-1 text-sm text-zinc-500">Hover to see the 3D effect.</p>
+    </TiltCard>
+  );
 }`;
 
 const sourceCode = readFileSync(
-  join(process.cwd(), "components/scramble-text.tsx"),
+  join(process.cwd(), "components/tilt-card.tsx"),
   "utf-8"
 );
 
-export default async function ScrambleTextPage() {
+export default async function TiltCardPage() {
   const [codeHtml, usageHtml] = await Promise.all([
     codeToHtml(sourceCode, { lang: "tsx", theme: "github-dark" }),
     codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" }),
@@ -47,11 +52,11 @@ export default async function ScrambleTextPage() {
           Components
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-zinc-900">
-          Scramble Text
+          Tilt Card
         </h1>
         <p className="mt-3 text-zinc-500 leading-relaxed max-w-lg">
-          Text that cycles through random characters before resolving, creating
-          a satisfying decoding effect. Triggers on hover or mount.
+          A card that tilts in 3D perspective toward the cursor, with a subtle
+          glare that follows the mouse. Wrap any content — works as a container.
         </p>
       </div>
 
@@ -60,9 +65,27 @@ export default async function ScrambleTextPage() {
           Preview
         </h2>
         <PreviewTabs>
-          <ScrambleText className="text-2xl font-semibold text-zinc-900">
-            Hover over me
-          </ScrambleText>
+          <TiltCard className="rounded-2xl border border-zinc-200 bg-white p-8 shadow-md w-64">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100">
+              <svg
+                className="h-5 w-5 text-zinc-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
+                />
+              </svg>
+            </div>
+            <p className="font-semibold text-zinc-900">Tilt Card</p>
+            <p className="mt-1 text-sm text-zinc-500 leading-relaxed">
+              Hover to see the 3D tilt and glare effect.
+            </p>
+          </TiltCard>
         </PreviewTabs>
       </section>
 
@@ -104,28 +127,28 @@ export default async function ScrambleTextPage() {
             </thead>
             <tbody className="divide-y divide-zinc-100">
               <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">children</td>
+                <td className="px-4 py-3 font-mono text-zinc-800">maxTilt</td>
+                <td className="px-4 py-3 text-zinc-500">number</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">15</td>
+                <td className="px-4 py-3 text-zinc-500">Maximum tilt angle in degrees</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">glare</td>
+                <td className="px-4 py-3 text-zinc-500">boolean</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">true</td>
+                <td className="px-4 py-3 text-zinc-500">Show a glare overlay that follows the cursor</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">scale</td>
+                <td className="px-4 py-3 text-zinc-500">number</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">1.03</td>
+                <td className="px-4 py-3 text-zinc-500">Scale factor applied on hover</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">className</td>
                 <td className="px-4 py-3 text-zinc-500">string</td>
                 <td className="px-4 py-3 font-mono text-zinc-400">—</td>
-                <td className="px-4 py-3 text-zinc-500">The text to scramble</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">trigger</td>
-                <td className="px-4 py-3 text-zinc-500">&quot;hover&quot; | &quot;mount&quot; | &quot;both&quot;</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">&quot;hover&quot;</td>
-                <td className="px-4 py-3 text-zinc-500">When to play the scramble animation</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">speed</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">40</td>
-                <td className="px-4 py-3 text-zinc-500">Interval between character updates (ms)</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">cycles</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">8</td>
-                <td className="px-4 py-3 text-zinc-500">Scramble cycles before each character resolves</td>
+                <td className="px-4 py-3 text-zinc-500">CSS classes for rounding, border, background, padding</td>
               </tr>
             </tbody>
           </table>

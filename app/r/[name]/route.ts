@@ -23,6 +23,11 @@ export async function GET(
       title: "Confetti Button",
       description: "A button that bursts confetti from the click position, with physics-based particles that drift and fade.",
     },
+    "tilt-card": {
+      file: "components/tilt-card.tsx",
+      title: "Tilt Card",
+      description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    },
   };
 
   const entry = registry[name];
