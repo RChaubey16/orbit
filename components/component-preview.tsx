@@ -5,6 +5,7 @@ import { ConfettiButton } from "@/components/confetti-button";
 import { ScrambleText } from "@/components/scramble-text";
 import { TiltCard } from "@/components/tilt-card";
 import { SpotlightCard } from "@/components/spotlight-card";
+import { FlipCounterDemo } from "@/components/flip-counter-demo";
 
 const previews: Record<string, React.ReactNode> = {
   "keyboard-button": <KeyboardButton>Click me</KeyboardButton>,
@@ -21,6 +22,7 @@ const previews: Record<string, React.ReactNode> = {
       </div>
     </TiltCard>
   ),
+  "flip-counter": <FlipCounterDemo />,
   "spotlight-card": (
     <SpotlightCard
       className="w-full bg-zinc-900"

@@ -33,6 +33,11 @@ export async function GET(
       title: "Spotlight Card",
       description: "A card with a radial light beam that tracks the cursor across its surface, giving a premium holographic feel.",
     },
+    "flip-counter": {
+      file: "components/flip-counter.tsx",
+      title: "Flip Counter",
+      description: "A counter where each digit flips with a satisfying mechanical animation, like an airport departure board.",
+    },
   };
 
   const entry = registry[name];

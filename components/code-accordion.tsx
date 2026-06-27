@@ -28,7 +28,7 @@ export function CodeAccordion({ codeHtml, rawCode }: CodeAccordionProps) {
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {open && (
+      {open ? (
         <div className="relative border-t border-zinc-800">
           <div className="absolute top-3.5 right-4 z-10">
             <CopyButton text={rawCode} />
@@ -38,7 +38,7 @@ export function CodeAccordion({ codeHtml, rawCode }: CodeAccordionProps) {
             dangerouslySetInnerHTML={{ __html: codeHtml }}
           />
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

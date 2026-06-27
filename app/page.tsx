@@ -23,6 +23,7 @@ const previewHeights: Record<string, string> = {
   "keyboard-button": "h-36",
   "scramble-text":   "h-48",
   "confetti-button": "h-40",
+  "flip-counter":    "h-40",
 };
 
 const VIEW_LINK_CLASS = "absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-zinc-900 hover:border-zinc-300";
@@ -33,41 +34,15 @@ const VIEW_ICON = (
   </svg>
 );
 
-function CardPreview({ name, href }: { name: string; href: string }) {
-  if (name === "tilt-card") {
-    return (
-      <TiltCard
-        className="group relative break-inside-avoid mb-3 rounded-xl border border-zinc-200 w-full bg-white"
-        image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=80"
-      >
-        <div className="px-5 py-4">
-          <p className="text-sm font-semibold text-zinc-900">Mountain Vista</p>
-          <p className="mt-1 text-xs text-zinc-500 leading-relaxed">Hover to feel the depth.</p>
-        </div>
-        <Link href={href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
-      </TiltCard>
-    );
-  }
-  if (name === "spotlight-card") {
-    return (
-      <SpotlightCard
-        className="group relative break-inside-avoid mb-3 rounded-xl border border-zinc-800 w-full bg-zinc-900"
-        image="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&auto=format&fit=crop&q=80"
-      >
-        <div className="px-5 py-4">
-          <p className="text-sm font-semibold text-white">Night Sky</p>
-          <p className="mt-1 text-xs text-zinc-400 leading-relaxed">Move your cursor across.</p>
-        </div>
-        <Link href={href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
-      </SpotlightCard>
-    );
-  }
-  return null;
-}
-
 const cardComponents = new Set(["tilt-card", "spotlight-card"]);
 
+const NUM_COLS = 4;
+
 export default function Home() {
+  // Distribute items round-robin into 4 columns so all columns are always filled
+  const cols: (typeof components)[] = Array.from({ length: NUM_COLS }, () => []);
+  components.forEach((c, i) => cols[i % NUM_COLS].push(c));
+
   return (
     <PageTransition>
       <div className="flex flex-col items-center justify-center min-h-[40vh] px-4 text-center max-w-4xl mx-auto w-full">
@@ -86,28 +61,48 @@ export default function Home() {
       </div>
 
       <div className="px-4 pb-16 sm:px-8 md:px-12 lg:px-20">
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3">
-          {components.map((component) =>
-            cardComponents.has(component.name) ? (
-              <CardPreview key={component.name} name={component.name} href={component.href} />
-            ) : (
-              <div
-                key={component.name}
-                className={`group relative flex items-center justify-center break-inside-avoid mb-3 rounded-xl border border-zinc-200 overflow-hidden bg-zinc-50 transition-colors hover:border-zinc-300 ${previewHeights[component.name] ?? "h-40"}`}
-              >
-                <ComponentPreview name={component.name} />
-                <Link
-                  href={component.href}
-                  className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-zinc-900 hover:border-zinc-300"
-                >
-                  View
-                  <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </Link>
-              </div>
-            )
-          )}
+        <div className="flex gap-3">
+          {cols.map((col, colIdx) => (
+            <div key={colIdx} className="flex-1 flex flex-col gap-3 min-w-0">
+              {col.map((component) =>
+                cardComponents.has(component.name) ? (
+                  component.name === "tilt-card" ? (
+                    <TiltCard
+                      key={component.name}
+                      className="group relative rounded-xl border border-zinc-200 w-full bg-white"
+                      image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=80"
+                    >
+                      <div className="px-5 py-4">
+                        <p className="text-sm font-semibold text-zinc-900">Mountain Vista</p>
+                        <p className="mt-1 text-xs text-zinc-500 leading-relaxed">Hover to feel the depth.</p>
+                      </div>
+                      <Link href={component.href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
+                    </TiltCard>
+                  ) : (
+                    <SpotlightCard
+                      key={component.name}
+                      className="group relative rounded-xl border border-zinc-800 w-full bg-zinc-900"
+                      image="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&auto=format&fit=crop&q=80"
+                    >
+                      <div className="px-5 py-4">
+                        <p className="text-sm font-semibold text-white">Night Sky</p>
+                        <p className="mt-1 text-xs text-zinc-400 leading-relaxed">Move your cursor across.</p>
+                      </div>
+                      <Link href={component.href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
+                    </SpotlightCard>
+                  )
+                ) : (
+                  <div
+                    key={component.name}
+                    className={`group relative flex items-center justify-center rounded-xl border border-zinc-200 overflow-hidden bg-zinc-50 transition-colors hover:border-zinc-300 ${previewHeights[component.name] ?? "h-40"}`}
+                  >
+                    <ComponentPreview name={component.name} />
+                    <Link href={component.href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
+                  </div>
+                )
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </PageTransition>

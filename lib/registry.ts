@@ -29,4 +29,10 @@ export const components = [
     description: "A card with a radial light beam that tracks the cursor across its surface, giving a premium holographic feel.",
     href: "/components/spotlight-card",
   },
+  {
+    name: "flip-counter",
+    title: "Flip Counter",
+    description: "A counter where each digit flips with a satisfying mechanical animation, like an airport departure board.",
+    href: "/components/flip-counter",
+  },
 ];
