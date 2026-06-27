@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { components } from "@/lib/registry";
 import { PageTransition } from "@/components/page-transition";
+import { ComponentPreview } from "@/components/component-preview";
 
 export const metadata: Metadata = {
   title: "Orbit — Components built to feel different",
@@ -35,18 +36,23 @@ export default function Home() {
       </div>
 
       <div className="px-4 pb-16 sm:px-12 md:px-20">
-        <p className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-6">
-          All components
-        </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {components.map((component) => (
-            <Link
+            <div
               key={component.name}
-              href={component.href}
-              className="group rounded-xl border border-zinc-200 px-4 py-3 hover:border-zinc-300 transition-colors"
+              className="group relative flex items-center justify-center h-32 rounded-xl border border-zinc-200 bg-zinc-50 hover:border-zinc-300 transition-colors"
             >
-              <p className="text-sm font-medium text-zinc-900">{component.title}</p>
-            </Link>
+              <ComponentPreview name={component.name} />
+              <Link
+                href={component.href}
+                className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-zinc-900 hover:border-zinc-300"
+              >
+                View
+                <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
