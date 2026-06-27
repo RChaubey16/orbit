@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { components } from "@/lib/registry";
 import { PageTransition } from "@/components/page-transition";
 import { ComponentPreview } from "@/components/component-preview";
 import { TiltCard } from "@/components/tilt-card";
 import { SpotlightCard } from "@/components/spotlight-card";
+import { AuroraBackground } from "@/components/aurora-background";
 
 export const metadata: Metadata = {
   title: "Orbit — Components built to feel different",
@@ -28,18 +30,13 @@ const previewHeights: Record<string, string> = {
 
 const VIEW_LINK_CLASS = "absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-white border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:text-zinc-900 hover:border-zinc-300";
 
-const VIEW_ICON = (
-  <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-  </svg>
-);
+const VIEW_ICON = <ArrowUpRight className="h-3 w-3" />;
 
-const cardComponents = new Set(["tilt-card", "spotlight-card"]);
+const cardComponents = new Set(["tilt-card", "spotlight-card", "aurora-background"]);
 
 const NUM_COLS = 4;
 
 export default function Home() {
-  // Distribute items round-robin into 4 columns so all columns are always filled
   const cols: (typeof components)[] = Array.from({ length: NUM_COLS }, () => []);
   components.forEach((c, i) => cols[i % NUM_COLS].push(c));
 
@@ -78,7 +75,7 @@ export default function Home() {
                       </div>
                       <Link href={component.href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
                     </TiltCard>
-                  ) : (
+                  ) : component.name === "spotlight-card" ? (
                     <SpotlightCard
                       key={component.name}
                       className="group relative rounded-xl border border-zinc-800 w-full bg-zinc-900"
@@ -90,6 +87,17 @@ export default function Home() {
                       </div>
                       <Link href={component.href} className={VIEW_LINK_CLASS}>View{VIEW_ICON}</Link>
                     </SpotlightCard>
+                  ) : (
+                    <AuroraBackground
+                      key={component.name}
+                      className="group relative rounded-xl w-full"
+                    >
+                      <div className="relative z-10 flex flex-col items-center justify-center min-h-[180px] text-center px-6 py-8">
+                        <p className="text-sm font-semibold text-white">Aurora Background</p>
+                        <p className="mt-1 text-xs text-zinc-400 leading-relaxed">Dreamy drifting gradients.</p>
+                      </div>
+                      <Link href={component.href} className={`z-20 ${VIEW_LINK_CLASS}`}>View{VIEW_ICON}</Link>
+                    </AuroraBackground>
                   )
                 ) : (
                   <div

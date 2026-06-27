@@ -3,10 +3,10 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { codeToHtml } from "shiki";
 import { ConfettiButton } from "@/components/confetti-button";
-import { CopyButton } from "@/components/copy-button";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { CodeAccordion } from "@/components/code-accordion";
+import { PrevNextNav } from "@/components/prev-next-nav";
 
 export const metadata: Metadata = {
   title: "Confetti Button",
@@ -59,7 +59,7 @@ export default async function ConfettiButtonPage() {
         <h2 className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-4">
           Preview
         </h2>
-        <PreviewTabs>
+        <PreviewTabs codeHtml={usageHtml} rawCode={USAGE_CODE}>
           <ConfettiButton>Click me</ConfettiButton>
         </PreviewTabs>
       </section>
@@ -69,21 +69,6 @@ export default async function ConfettiButtonPage() {
           Installation
         </h2>
         <PackageManagerTabs registryUrl={REGISTRY_URL} />
-      </section>
-
-      <section className="mb-12">
-        <h2 className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-4">
-          Usage
-        </h2>
-        <div className="relative rounded-xl overflow-hidden">
-          <div className="absolute top-3.5 right-4 z-10">
-            <CopyButton text={USAGE_CODE} />
-          </div>
-          <div
-            className="text-sm [&>pre]:p-5 [&>pre]:overflow-x-auto [&>pre]:rounded-xl [&>pre]:leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: usageHtml }}
-          />
-        </div>
       </section>
 
       <section className="mb-12">
@@ -118,12 +103,14 @@ export default async function ConfettiButtonPage() {
         </div>
       </section>
 
-      <section>
+      <section className="mb-12">
         <h2 className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-4">
           Component
         </h2>
         <CodeAccordion codeHtml={codeHtml} rawCode={sourceCode} />
       </section>
+
+      <PrevNextNav currentName="confetti-button" />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { ScrambleText } from "@/components/scramble-text";
 import { TiltCard } from "@/components/tilt-card";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { FlipCounterDemo } from "@/components/flip-counter-demo";
+import { AuroraBackground } from "@/components/aurora-background";
 
 const previews: Record<string, React.ReactNode> = {
   "keyboard-button": <KeyboardButton>Click me</KeyboardButton>,
@@ -33,6 +34,13 @@ const previews: Record<string, React.ReactNode> = {
         <p className="mt-1 text-xs text-zinc-400 leading-relaxed">Move your cursor across.</p>
       </div>
     </SpotlightCard>
+  ),
+  "aurora-background": (
+    <AuroraBackground className="w-full rounded-lg">
+      <div className="relative z-10 flex items-center justify-center min-h-[6rem]">
+        <p className="text-xs font-semibold text-white tracking-wide">Aurora</p>
+      </div>
+    </AuroraBackground>
   ),
 };
 

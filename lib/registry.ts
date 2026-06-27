@@ -35,4 +35,10 @@ export const components = [
     description: "A counter where each digit flips with a satisfying mechanical animation, like an airport departure board.",
     href: "/components/flip-counter",
   },
+  {
+    name: "aurora-background",
+    title: "Aurora Background",
+    description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
+    href: "/components/aurora-background",
+  },
 ];

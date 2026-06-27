@@ -38,6 +38,11 @@ export async function GET(
       title: "Flip Counter",
       description: "A counter where each digit flips with a satisfying mechanical animation, like an airport departure board.",
     },
+    "aurora-background": {
+      file: "components/aurora-background.tsx",
+      title: "Aurora Background",
+      description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
+    },
   };
 
   const entry = registry[name];

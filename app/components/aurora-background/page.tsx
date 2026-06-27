@@ -2,39 +2,46 @@ import type { Metadata } from "next";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { codeToHtml } from "shiki";
-import { ScrambleText } from "@/components/scramble-text";
+import { AuroraBackground } from "@/components/aurora-background";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { CodeAccordion } from "@/components/code-accordion";
 import { PrevNextNav } from "@/components/prev-next-nav";
 
 export const metadata: Metadata = {
-  title: "Scramble Text",
-  description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+  title: "Aurora Background",
+  description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
   openGraph: {
-    title: "Scramble Text · Orbit",
-    description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    title: "Aurora Background · Orbit",
+    description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
   },
   twitter: {
-    title: "Scramble Text · Orbit",
-    description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    title: "Aurora Background · Orbit",
+    description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
   },
 };
 
-const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/scramble-text`;
+const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/aurora-background`;
 
-const USAGE_CODE = `import { ScrambleText } from "@/components/scramble-text";
+const USAGE_CODE = `import { AuroraBackground } from "@/components/aurora-background";
 
 export default function Example() {
-  return <ScrambleText>Hover over me</ScrambleText>;
+  return (
+    <AuroraBackground className="rounded-2xl min-h-64">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-64 text-center px-8">
+        <h2 className="text-2xl font-semibold text-white">Hello, World.</h2>
+        <p className="mt-2 text-sm text-zinc-400">Wrap any content in Aurora.</p>
+      </div>
+    </AuroraBackground>
+  );
 }`;
 
 const sourceCode = readFileSync(
-  join(process.cwd(), "components/scramble-text.tsx"),
+  join(process.cwd(), "components/aurora-background.tsx"),
   "utf-8"
 );
 
-export default async function ScrambleTextPage() {
+export default async function AuroraBackgroundPage() {
   const [codeHtml, usageHtml] = await Promise.all([
     codeToHtml(sourceCode, { lang: "tsx", theme: "github-dark" }),
     codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" }),
@@ -47,11 +54,12 @@ export default async function ScrambleTextPage() {
           Components
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-zinc-900">
-          Scramble Text
+          Aurora Background
         </h1>
         <p className="mt-3 text-zinc-500 leading-relaxed max-w-lg">
-          Text that cycles through random characters before resolving, creating
-          a satisfying decoding effect. Triggers on hover or mount.
+          Softly animated blobs of color — violet, cyan, blue, fuchsia — that
+          slowly drift and blur into each other. Wrap any content to give it a
+          dreamy, premium backdrop.
         </p>
       </div>
 
@@ -60,9 +68,12 @@ export default async function ScrambleTextPage() {
           Preview
         </h2>
         <PreviewTabs codeHtml={usageHtml} rawCode={USAGE_CODE}>
-          <ScrambleText className="text-2xl font-semibold text-zinc-900">
-            Hover over me
-          </ScrambleText>
+          <AuroraBackground className="rounded-xl w-full">
+            <div className="relative z-10 flex flex-col items-center justify-center min-h-52 text-center px-8 py-12">
+              <p className="text-2xl font-semibold text-white">Hello, World.</p>
+              <p className="mt-2 text-sm text-zinc-400">Wrap any content in Aurora.</p>
+            </div>
+          </AuroraBackground>
         </PreviewTabs>
       </section>
 
@@ -90,27 +101,15 @@ export default async function ScrambleTextPage() {
             <tbody className="divide-y divide-zinc-100">
               <tr>
                 <td className="px-4 py-3 font-mono text-zinc-800">children</td>
+                <td className="px-4 py-3 text-zinc-500">ReactNode</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">—</td>
+                <td className="px-4 py-3 text-zinc-500">Content rendered on top of the aurora. Use relative z-10 for layering.</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">className</td>
                 <td className="px-4 py-3 text-zinc-500">string</td>
                 <td className="px-4 py-3 font-mono text-zinc-400">—</td>
-                <td className="px-4 py-3 text-zinc-500">The text to scramble</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">trigger</td>
-                <td className="px-4 py-3 text-zinc-500">&quot;hover&quot; | &quot;mount&quot; | &quot;both&quot;</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">&quot;hover&quot;</td>
-                <td className="px-4 py-3 text-zinc-500">When to play the scramble animation</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">speed</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">40</td>
-                <td className="px-4 py-3 text-zinc-500">Interval between character updates (ms)</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">cycles</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">8</td>
-                <td className="px-4 py-3 text-zinc-500">Scramble cycles before each character resolves</td>
+                <td className="px-4 py-3 text-zinc-500">Classes for rounding, sizing, and padding on the container.</td>
               </tr>
             </tbody>
           </table>
@@ -124,7 +123,7 @@ export default async function ScrambleTextPage() {
         <CodeAccordion codeHtml={codeHtml} rawCode={sourceCode} />
       </section>
 
-      <PrevNextNav currentName="scramble-text" />
+      <PrevNextNav currentName="aurora-background" />
     </div>
   );
 }
