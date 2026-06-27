@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { CopyButton } from "@/components/copy-button";
 
+const TABS = ["preview", "code"] as const;
+type Tab = (typeof TABS)[number];
+
 interface PreviewTabsProps {
   children: React.ReactNode;
   codeHtml?: string;
@@ -10,7 +13,7 @@ interface PreviewTabsProps {
 }
 
 export function PreviewTabs({ children, codeHtml, rawCode }: PreviewTabsProps) {
-  const [tab, setTab] = useState<"preview" | "code">("preview");
+  const [tab, setTab] = useState<Tab>("preview");
 
   if (!codeHtml) {
     return (
@@ -23,7 +26,7 @@ export function PreviewTabs({ children, codeHtml, rawCode }: PreviewTabsProps) {
   return (
     <div className="rounded-xl border border-zinc-200 overflow-hidden">
       <div className="flex border-b border-zinc-200 bg-white px-2 pt-2 gap-0.5">
-        {(["preview", "code"] as const).map((t) => (
+        {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}

@@ -43,6 +43,16 @@ export async function GET(
       title: "Aurora Background",
       description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
     },
+    "magnetic-button": {
+      file: "components/magnetic-button.tsx",
+      title: "Magnetic Button",
+      description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
+    },
+    "fireworks-button": {
+      file: "components/fireworks-button.tsx",
+      title: "Fireworks Button",
+      description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
+    },
   };
 
   const entry = registry[name];

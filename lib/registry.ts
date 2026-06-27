@@ -41,4 +41,16 @@ export const components = [
     description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
     href: "/components/aurora-background",
   },
+  {
+    name: "magnetic-button",
+    title: "Magnetic Button",
+    description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
+    href: "/components/magnetic-button",
+  },
+  {
+    name: "fireworks-button",
+    title: "Fireworks Button",
+    description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
+    href: "/components/fireworks-button",
+  },
 ];

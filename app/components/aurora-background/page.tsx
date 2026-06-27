@@ -41,11 +41,11 @@ const sourceCode = readFileSync(
   "utf-8"
 );
 
+const codeHtmlPromise = codeToHtml(sourceCode, { lang: "tsx", theme: "github-dark" });
+const usageHtmlPromise = codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" });
+
 export default async function AuroraBackgroundPage() {
-  const [codeHtml, usageHtml] = await Promise.all([
-    codeToHtml(sourceCode, { lang: "tsx", theme: "github-dark" }),
-    codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" }),
-  ]);
+  const [codeHtml, usageHtml] = await Promise.all([codeHtmlPromise, usageHtmlPromise]);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 sm:py-16 font-sans">

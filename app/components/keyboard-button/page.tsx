@@ -36,11 +36,11 @@ const displayCode = sourceCode.replace(
   'const CLICK_SOUND = "data:audio/mp3;base64,..."'
 );
 
+const codeHtmlPromise = codeToHtml(displayCode, { lang: "tsx", theme: "github-dark" });
+const usageHtmlPromise = codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" });
+
 export default async function KeyboardButtonPage() {
-  const [codeHtml, usageHtml] = await Promise.all([
-    codeToHtml(displayCode, { lang: "tsx", theme: "github-dark" }),
-    codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" }),
-  ]);
+  const [codeHtml, usageHtml] = await Promise.all([codeHtmlPromise, usageHtmlPromise]);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 sm:py-16 font-sans">

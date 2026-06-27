@@ -2,47 +2,42 @@ import type { Metadata } from "next";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { codeToHtml } from "shiki";
-import { TiltCard } from "@/components/tilt-card";
+import { MagneticButton } from "@/components/magnetic-button";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { CodeAccordion } from "@/components/code-accordion";
 import { PrevNextNav } from "@/components/prev-next-nav";
 
 export const metadata: Metadata = {
-  title: "Tilt Card",
-  description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+  title: "Magnetic Button",
+  description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
   openGraph: {
-    title: "Tilt Card · Orbit",
-    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    title: "Magnetic Button · Orbit",
+    description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
   },
   twitter: {
-    title: "Tilt Card · Orbit",
-    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    title: "Magnetic Button · Orbit",
+    description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
   },
 };
 
-const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/tilt-card`;
+const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/magnetic-button`;
 
-const USAGE_CODE = `import { TiltCard } from "@/components/tilt-card";
+const USAGE_CODE = `import { MagneticButton } from "@/components/magnetic-button";
 
 export default function Example() {
-  return (
-    <TiltCard className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md w-64">
-      <p className="text-sm font-semibold text-zinc-900">Tilt Card</p>
-      <p className="mt-1 text-sm text-zinc-500">Hover to see the 3D effect.</p>
-    </TiltCard>
-  );
+  return <MagneticButton>Hover near me</MagneticButton>;
 }`;
 
 const sourceCode = readFileSync(
-  join(process.cwd(), "components/tilt-card.tsx"),
+  join(process.cwd(), "components/magnetic-button.tsx"),
   "utf-8"
 );
 
 const codeHtmlPromise = codeToHtml(sourceCode, { lang: "tsx", theme: "github-dark" });
 const usageHtmlPromise = codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" });
 
-export default async function TiltCardPage() {
+export default async function MagneticButtonPage() {
   const [codeHtml, usageHtml] = await Promise.all([codeHtmlPromise, usageHtmlPromise]);
 
   return (
@@ -52,11 +47,12 @@ export default async function TiltCardPage() {
           Components
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-zinc-900">
-          Tilt Card
+          Magnetic Button
         </h1>
         <p className="mt-3 text-zinc-500 leading-relaxed max-w-lg">
-          A card that tilts in 3D perspective toward the cursor, with a subtle
-          glare that follows the mouse. Wrap any content — works as a container.
+          A button that pulls toward the cursor within a radius, then springs
+          back with mass and damping — creating a satisfying snap that feels
+          physical. Inner text floats independently for depth.
         </p>
       </div>
 
@@ -65,17 +61,7 @@ export default async function TiltCardPage() {
           Preview
         </h2>
         <PreviewTabs codeHtml={usageHtml} rawCode={USAGE_CODE}>
-          <TiltCard
-            className="rounded-2xl border border-zinc-200 bg-white shadow-md w-64"
-            image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=80"
-          >
-            <div className="p-6">
-              <p className="font-semibold text-zinc-900">Tilt Card</p>
-              <p className="mt-1 text-sm text-zinc-500 leading-relaxed">
-                Hover to see the 3D tilt and glare effect.
-              </p>
-            </div>
-          </TiltCard>
+          <MagneticButton>Hover near me</MagneticButton>
         </PreviewTabs>
       </section>
 
@@ -102,34 +88,28 @@ export default async function TiltCardPage() {
             </thead>
             <tbody className="divide-y divide-zinc-100">
               <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">maxTilt</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">15</td>
-                <td className="px-4 py-3 text-zinc-500">Maximum tilt angle in degrees</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">glare</td>
-                <td className="px-4 py-3 text-zinc-500">boolean</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">false</td>
-                <td className="px-4 py-3 text-zinc-500">Show a glare overlay that follows the cursor</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">scale</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">1.03</td>
-                <td className="px-4 py-3 text-zinc-500">Scale factor applied on hover</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">image</td>
-                <td className="px-4 py-3 text-zinc-500">string</td>
+                <td className="px-4 py-3 font-mono text-zinc-800">children</td>
+                <td className="px-4 py-3 text-zinc-500">ReactNode</td>
                 <td className="px-4 py-3 font-mono text-zinc-400">—</td>
-                <td className="px-4 py-3 text-zinc-500">Optional image URL rendered at the top of the card</td>
+                <td className="px-4 py-3 text-zinc-500">Button label</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">strength</td>
+                <td className="px-4 py-3 text-zinc-500">number</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">0.5</td>
+                <td className="px-4 py-3 text-zinc-500">Magnetic pull intensity (0–1)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">radius</td>
+                <td className="px-4 py-3 text-zinc-500">number</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">120</td>
+                <td className="px-4 py-3 text-zinc-500">Detection radius in pixels</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-mono text-zinc-800">className</td>
                 <td className="px-4 py-3 text-zinc-500">string</td>
                 <td className="px-4 py-3 font-mono text-zinc-400">—</td>
-                <td className="px-4 py-3 text-zinc-500">CSS classes for rounding, border, background, padding</td>
+                <td className="px-4 py-3 text-zinc-500">Overrides for color, size, rounding</td>
               </tr>
             </tbody>
           </table>
@@ -143,7 +123,7 @@ export default async function TiltCardPage() {
         <CodeAccordion codeHtml={codeHtml} rawCode={sourceCode} />
       </section>
 
-      <PrevNextNav currentName="tilt-card" />
+      <PrevNextNav currentName="magnetic-button" />
     </div>
   );
 }

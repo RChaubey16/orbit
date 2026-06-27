@@ -2,47 +2,42 @@ import type { Metadata } from "next";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { codeToHtml } from "shiki";
-import { TiltCard } from "@/components/tilt-card";
+import { FireworksButton } from "@/components/fireworks-button";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { CodeAccordion } from "@/components/code-accordion";
 import { PrevNextNav } from "@/components/prev-next-nav";
 
 export const metadata: Metadata = {
-  title: "Tilt Card",
-  description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+  title: "Fireworks Button",
+  description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
   openGraph: {
-    title: "Tilt Card · Orbit",
-    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    title: "Fireworks Button · Orbit",
+    description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
   },
   twitter: {
-    title: "Tilt Card · Orbit",
-    description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    title: "Fireworks Button · Orbit",
+    description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
   },
 };
 
-const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/tilt-card`;
+const REGISTRY_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/r/fireworks-button`;
 
-const USAGE_CODE = `import { TiltCard } from "@/components/tilt-card";
+const USAGE_CODE = `import { FireworksButton } from "@/components/fireworks-button";
 
 export default function Example() {
-  return (
-    <TiltCard className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md w-64">
-      <p className="text-sm font-semibold text-zinc-900">Tilt Card</p>
-      <p className="mt-1 text-sm text-zinc-500">Hover to see the 3D effect.</p>
-    </TiltCard>
-  );
+  return <FireworksButton>Launch 🎆</FireworksButton>;
 }`;
 
 const sourceCode = readFileSync(
-  join(process.cwd(), "components/tilt-card.tsx"),
+  join(process.cwd(), "components/fireworks-button.tsx"),
   "utf-8"
 );
 
 const codeHtmlPromise = codeToHtml(sourceCode, { lang: "tsx", theme: "github-dark" });
 const usageHtmlPromise = codeToHtml(USAGE_CODE, { lang: "tsx", theme: "github-dark" });
 
-export default async function TiltCardPage() {
+export default async function FireworksButtonPage() {
   const [codeHtml, usageHtml] = await Promise.all([codeHtmlPromise, usageHtmlPromise]);
 
   return (
@@ -52,11 +47,13 @@ export default async function TiltCardPage() {
           Components
         </p>
         <h1 className="text-3xl font-semibold tracking-tight text-zinc-900">
-          Tilt Card
+          Fireworks Button
         </h1>
         <p className="mt-3 text-zinc-500 leading-relaxed max-w-lg">
-          A card that tilts in 3D perspective toward the cursor, with a subtle
-          glare that follows the mouse. Wrap any content — works as a container.
+          Click to launch rockets from the bottom of the screen. Each rocket
+          travels upward with a glowing trail, then explodes into a bloom of
+          gravity-pulled, drag-dampened particles — with glitter that twinkles
+          as it falls.
         </p>
       </div>
 
@@ -65,17 +62,7 @@ export default async function TiltCardPage() {
           Preview
         </h2>
         <PreviewTabs codeHtml={usageHtml} rawCode={USAGE_CODE}>
-          <TiltCard
-            className="rounded-2xl border border-zinc-200 bg-white shadow-md w-64"
-            image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=80"
-          >
-            <div className="p-6">
-              <p className="font-semibold text-zinc-900">Tilt Card</p>
-              <p className="mt-1 text-sm text-zinc-500 leading-relaxed">
-                Hover to see the 3D tilt and glare effect.
-              </p>
-            </div>
-          </TiltCard>
+          <FireworksButton>Launch 🎆</FireworksButton>
         </PreviewTabs>
       </section>
 
@@ -102,34 +89,22 @@ export default async function TiltCardPage() {
             </thead>
             <tbody className="divide-y divide-zinc-100">
               <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">maxTilt</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">15</td>
-                <td className="px-4 py-3 text-zinc-500">Maximum tilt angle in degrees</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">glare</td>
-                <td className="px-4 py-3 text-zinc-500">boolean</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">false</td>
-                <td className="px-4 py-3 text-zinc-500">Show a glare overlay that follows the cursor</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">scale</td>
-                <td className="px-4 py-3 text-zinc-500">number</td>
-                <td className="px-4 py-3 font-mono text-zinc-400">1.03</td>
-                <td className="px-4 py-3 text-zinc-500">Scale factor applied on hover</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-zinc-800">image</td>
-                <td className="px-4 py-3 text-zinc-500">string</td>
+                <td className="px-4 py-3 font-mono text-zinc-800">children</td>
+                <td className="px-4 py-3 text-zinc-500">ReactNode</td>
                 <td className="px-4 py-3 font-mono text-zinc-400">—</td>
-                <td className="px-4 py-3 text-zinc-500">Optional image URL rendered at the top of the card</td>
+                <td className="px-4 py-3 text-zinc-500">Button label</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-zinc-800">count</td>
+                <td className="px-4 py-3 text-zinc-500">number</td>
+                <td className="px-4 py-3 font-mono text-zinc-400">5</td>
+                <td className="px-4 py-3 text-zinc-500">Number of rockets launched per click</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-mono text-zinc-800">className</td>
                 <td className="px-4 py-3 text-zinc-500">string</td>
                 <td className="px-4 py-3 font-mono text-zinc-400">—</td>
-                <td className="px-4 py-3 text-zinc-500">CSS classes for rounding, border, background, padding</td>
+                <td className="px-4 py-3 text-zinc-500">Overrides for color, size, rounding</td>
               </tr>
             </tbody>
           </table>
@@ -143,7 +118,7 @@ export default async function TiltCardPage() {
         <CodeAccordion codeHtml={codeHtml} rawCode={sourceCode} />
       </section>
 
-      <PrevNextNav currentName="tilt-card" />
+      <PrevNextNav currentName="fireworks-button" />
     </div>
   );
 }

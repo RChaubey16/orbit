@@ -7,6 +7,8 @@ import { TiltCard } from "@/components/tilt-card";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { FlipCounterDemo } from "@/components/flip-counter-demo";
 import { AuroraBackground } from "@/components/aurora-background";
+import { MagneticButton } from "@/components/magnetic-button";
+import { FireworksButton } from "@/components/fireworks-button";
 
 const previews: Record<string, React.ReactNode> = {
   "keyboard-button": <KeyboardButton>Click me</KeyboardButton>,
@@ -42,6 +44,8 @@ const previews: Record<string, React.ReactNode> = {
       </div>
     </AuroraBackground>
   ),
+  "magnetic-button": <MagneticButton>Hover near me</MagneticButton>,
+  "fireworks-button": <FireworksButton>Launch 🎆</FireworksButton>,
 };
 
 export function ComponentPreview({ name }: { name: string }) {
