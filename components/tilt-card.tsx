@@ -7,14 +7,16 @@ interface TiltCardProps extends HTMLAttributes<HTMLDivElement> {
   maxTilt?: number;
   glare?: boolean;
   scale?: number;
+  image?: string;
 }
 
 export function TiltCard({
   children,
   className = "",
   maxTilt = 15,
-  glare = true,
+  glare = false,
   scale = 1.03,
+  image,
   ...props
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -64,6 +66,13 @@ export function TiltCard({
           ref={glareRef}
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 rounded-[inherit]"
+        />
+      )}
+      {image && (
+        <img
+          src={image}
+          alt=""
+          className="w-full h-36 object-cover"
         />
       )}
       {children}

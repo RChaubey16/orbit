@@ -45,6 +45,27 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <footer className="mt-auto border-t border-zinc-100 py-6 text-center text-xs text-zinc-400">
+          Built with care by{" "}
+          <a
+            href="https://github.com/RChaubey16"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-500 hover:text-zinc-900 transition-colors"
+          >
+            Ruturaj
+          </a>
+          . Open source on{" "}
+          <a
+            href="https://github.com/RChaubey16/orbit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-500 hover:text-zinc-900 transition-colors"
+          >
+            GitHub
+          </a>
+          .
+        </footer>
       </body>
     </html>
   );

@@ -23,4 +23,10 @@ export const components = [
     description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
     href: "/components/tilt-card",
   },
+  {
+    name: "spotlight-card",
+    title: "Spotlight Card",
+    description: "A card with a radial light beam that tracks the cursor across its surface, giving a premium holographic feel.",
+    href: "/components/spotlight-card",
+  },
 ];

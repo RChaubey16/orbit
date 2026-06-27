@@ -92,8 +92,8 @@ export default async function ScrambleTextPage() {
         <h2 className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-4">
           Props
         </h2>
-        <div className="overflow-hidden rounded-xl border border-zinc-200">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-xl border border-zinc-200">
+          <table className="w-full min-w-[480px] text-sm">
             <thead>
               <tr className="border-b border-zinc-200 bg-zinc-50">
                 <th className="px-4 py-3 text-left font-medium text-zinc-500">Prop</th>

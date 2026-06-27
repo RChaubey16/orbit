@@ -28,6 +28,11 @@ export async function GET(
       title: "Tilt Card",
       description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
     },
+    "spotlight-card": {
+      file: "components/spotlight-card.tsx",
+      title: "Spotlight Card",
+      description: "A card with a radial light beam that tracks the cursor across its surface, giving a premium holographic feel.",
+    },
   };
 
   const entry = registry[name];
