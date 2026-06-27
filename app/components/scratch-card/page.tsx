@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Scratch Card · Orbit",
     description: "A canvas-based scratch card that reveals hidden content as you draw over it, with auto-reveal once a threshold is reached.",
+    url: "/components/scratch-card",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Scratch Card · Orbit",
     description: "A canvas-based scratch card that reveals hidden content as you draw over it, with auto-reveal once a threshold is reached.",
+    images: ["/orbit-home.png"],
   },
 };
 

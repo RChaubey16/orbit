@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Confetti Button · Orbit",
     description: "A button that bursts confetti from the click position, with physics-based particles that drift and fade.",
+    url: "/components/confetti-button",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Confetti Button · Orbit",
     description: "A button that bursts confetti from the click position, with physics-based particles that drift and fade.",
+    images: ["/orbit-home.png"],
   },
 };
 

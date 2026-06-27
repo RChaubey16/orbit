@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Aurora Background · Orbit",
     description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
+    url: "/components/aurora-background",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Aurora Background · Orbit",
     description: "A softly animated background of drifting color blobs that blend into a dreamy aurora effect.",
+    images: ["/orbit-home.png"],
   },
 };
 

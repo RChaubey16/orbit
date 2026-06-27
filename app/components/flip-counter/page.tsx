@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Flip Counter · Orbit",
     description: "A counter where each digit flips with a satisfying mechanical animation, like an airport departure board.",
+    url: "/components/flip-counter",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Flip Counter · Orbit",
     description: "A counter where each digit flips with a satisfying mechanical animation, like an airport departure board.",
+    images: ["/orbit-home.png"],
   },
 };
 

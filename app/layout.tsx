@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     title: "Orbit",
     description: "An open-source component library focused on interaction and physical feel.",
     type: "website",
+    siteName: "Orbit",
+    locale: "en_US",
     images: [{ url: "/orbit-home.png" }],
   },
   twitter: {

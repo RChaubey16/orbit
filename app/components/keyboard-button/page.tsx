@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Keyboard Button · Orbit",
     description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
+    url: "/components/keyboard-button",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Keyboard Button · Orbit",
     description: "A button that looks and feels like a mechanical keyboard key, with visual depth and a satisfying click sound.",
+    images: ["/orbit-home.png"],
   },
 };
 

@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Spotlight Card · Orbit",
     description: "A card with a radial light beam that tracks the cursor across its surface, giving a premium holographic feel.",
+    url: "/components/spotlight-card",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Spotlight Card · Orbit",
     description: "A card with a radial light beam that tracks the cursor across its surface, giving a premium holographic feel.",
+    images: ["/orbit-home.png"],
   },
 };
 

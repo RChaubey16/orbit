@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fireworks Button · Orbit",
     description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
+    url: "/components/fireworks-button",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Fireworks Button · Orbit",
     description: "A button that launches physics-based fireworks from the bottom of the screen — rockets, trails, blooms, and glitter.",
+    images: ["/orbit-home.png"],
   },
 };
 

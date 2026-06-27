@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tilt Card · Orbit",
     description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    url: "/components/tilt-card",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Tilt Card · Orbit",
     description: "A card that tilts in 3D perspective toward the cursor, with a subtle glare that follows the mouse.",
+    images: ["/orbit-home.png"],
   },
 };
 

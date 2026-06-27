@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Glitch Text · Orbit",
     description: "Text with layered chromatic aberration and scan-line displacement, creating a digital corruption effect.",
+    url: "/components/glitch-text",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Glitch Text · Orbit",
     description: "Text with layered chromatic aberration and scan-line displacement, creating a digital corruption effect.",
+    images: ["/orbit-home.png"],
   },
 };
 

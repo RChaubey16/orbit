@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Magnetic Button · Orbit",
     description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
+    url: "/components/magnetic-button",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Magnetic Button · Orbit",
     description: "A button with spring physics that attracts toward the cursor and snaps back with a satisfying bounce.",
+    images: ["/orbit-home.png"],
   },
 };
 

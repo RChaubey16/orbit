@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Orbit — Components built to feel different",
     description: "An open-source component library focused on interaction and physical feel.",
+    url: "/",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Orbit — Components built to feel different",
     description: "An open-source component library focused on interaction and physical feel.",
+    images: ["/orbit-home.png"],
   },
 };
 

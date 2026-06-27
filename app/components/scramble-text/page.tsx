@@ -14,10 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Scramble Text · Orbit",
     description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    url: "/components/scramble-text",
+    images: [{ url: "/orbit-home.png" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "Scramble Text · Orbit",
     description: "Text that cycles through random characters before resolving, creating a satisfying decoding effect.",
+    images: ["/orbit-home.png"],
   },
 };
 
