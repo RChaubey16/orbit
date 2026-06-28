@@ -13,9 +13,9 @@ import { GlitchText } from "@/components/glitch-text";
 import { ScratchCard } from "@/components/scratch-card";
 
 const previews: Record<string, React.ReactNode> = {
-  "keyboard-button": <KeyboardButton>Click me</KeyboardButton>,
+  "keyboard-button": <KeyboardButton>Keyboard Button</KeyboardButton>,
   "scramble-text": <ScrambleText trigger="both">Scramble Text</ScrambleText>,
-  "confetti-button": <ConfettiButton>Click me</ConfettiButton>,
+  "confetti-button": <ConfettiButton>Confetti Button</ConfettiButton>,
   "tilt-card": (
     <TiltCard
       className="w-full bg-white"
@@ -46,8 +46,8 @@ const previews: Record<string, React.ReactNode> = {
       </div>
     </AuroraBackground>
   ),
-  "magnetic-button": <MagneticButton>Hover near me</MagneticButton>,
-  "fireworks-button": <FireworksButton>Launch 🎆</FireworksButton>,
+  "magnetic-button": <MagneticButton>Magnetic Button</MagneticButton>,
+  "fireworks-button": <FireworksButton>Fireworks Button</FireworksButton>,
   "glitch-text": (
     <GlitchText trigger="always" className="text-xl font-bold text-zinc-900">
       GLITCH TEXT
